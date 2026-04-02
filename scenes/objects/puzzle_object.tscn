@@ -1,0 +1,33 @@
+[gd_scene format=3 uid="uid://chs3ia44ls6on"]
+
+[ext_resource type="Script" uid="uid://cfdptn85m3ue8" path="res://scenes/objects/puzzle_object.gd" id="1_072mk"]
+[ext_resource type="Texture2D" uid="uid://di4flk0bjrp18" path="res://assets/sprites/puzzle_box/box.jpg" id="2_tvsyx"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_072mk"]
+size = Vector2(15, 15)
+
+[node name="PuzzleObject" type="Area2D" unique_id=876441161]
+script = ExtResource("1_072mk")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=971782441]
+position = Vector2(1.7881393e-07, 1.7881393e-07)
+scale = Vector2(0.016, 0.015999999)
+texture = ExtResource("2_tvsyx")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=174396021]
+scale = Vector2(0.99999994, 0.99999994)
+shape = SubResource("RectangleShape2D_072mk")
+
+[node name="Label" type="Label" parent="." unique_id=2011177563]
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_left = -3.0
+offset_top = -6.0
+offset_right = 9.0
+offset_bottom = 17.0
+grow_vertical = 2
+scale = Vector2(0.5, 0.5)
+text = "1"
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true

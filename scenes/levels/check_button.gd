@@ -7,5 +7,6 @@ func interact():
 	scale = Vector2(0.9, 0.9)
 	await get_tree().create_timer(0.1).timeout
 	scale = Vector2(1, 1)
-	
-	get_node("../LevelLogic").check_win()
+
+	var result = get_node("../LevelLogic").check_win()
+	get_node("../LevelLogic").check_answer(result)

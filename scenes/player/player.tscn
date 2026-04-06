@@ -197,7 +197,7 @@ shape = SubResource("RectangleShape2D_dovo2")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=2108369729]
 zoom = Vector2(3, 3)
-limit_left = -9999982
+limit_left = -9999981
 limit_top = -9999916
 limit_right = 10000018
-limit_bottom = 84
+limit_bottom = 58

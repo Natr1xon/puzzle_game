@@ -4,30 +4,32 @@ const SPEED = 130.0
 const JUMP_VELOCITY = -300.0
 
 var selected_object = null
+var is_passing_through = false
+
+const ONE_WAY_LAYER = 2
 
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var input_handler = get_node("../InputHandler")
 @onready var interaction_area = get_node_or_null("InteractionArea")
 
 func _ready():
-	print("interaction_area valid:", is_instance_valid(interaction_area))
-	print("InputHandler:", input_handler)
-	print("interaction_area:", interaction_area)
-	print("Дети Player:")
-	for child in get_children():
-		print(child.name)
+	floor_max_angle = deg_to_rad(75)
+	floor_stop_on_slope = false
+	floor_snap_length = 5.0
 
 func _physics_process(delta: float) -> void:
-	# Add the gravity.
+	# Gravity
 	if not is_on_floor():
 		velocity += get_gravity() * delta
 
-	# Handle jump.
-	if Input.is_action_just_pressed("jump") and is_on_floor():
+	# Jump
+	if Input.is_action_just_pressed("jump") and is_on_floor() and not is_passing_through:
 		velocity.y = JUMP_VELOCITY
 
-	# Get the input direction and handle the movement/deceleration.
-	# As good practice, you should replace UI actions with custom gameplay actions.
+	if Input.is_action_just_pressed("move_down") and is_on_floor() and not is_passing_through:
+		pass_through_one_way_platform()
+
+	# Movement
 	var direction := Input.get_axis("move_left", "move_right")
 	
 	if direction > 0: 
@@ -52,6 +54,17 @@ func _physics_process(delta: float) -> void:
 		interact()
 
 	move_and_slide()
+
+func pass_through_one_way_platform():
+	var layer_bit = 1 << (ONE_WAY_LAYER - 1)  
+	collision_mask &= ~layer_bit  
+	is_passing_through = true
+	velocity.y = 40
+	
+	await get_tree().create_timer(0.2).timeout
+	collision_mask |= layer_bit
+	is_passing_through = false
+	
 	
 func interact():
 	if interaction_area == null:

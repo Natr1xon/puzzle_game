@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://chs3ia44ls6on"]
 
-[ext_resource type="Script" uid="uid://cfdptn85m3ue8" path="res://scenes/objects/puzzle_object.gd" id="1_072mk"]
+[ext_resource type="Script" uid="uid://cfdptn85m3ue8" path="res://scripts/puzzle_object.gd" id="1_072mk"]
 [ext_resource type="Texture2D" uid="uid://di4flk0bjrp18" path="res://assets/sprites/puzzle_box/box.jpg" id="2_tvsyx"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_072mk"]

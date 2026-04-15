@@ -1,11 +1,19 @@
 [gd_scene format=4 uid="uid://rhekrcx6c3sk"]
 
 [ext_resource type="PackedScene" uid="uid://cf043gxy2xtfm" path="res://scenes/kill_zone.tscn" id="2_3acmf"]
+[ext_resource type="Script" uid="uid://butwwa1httray" path="res://scripts/level_2/input_handler_2.gd" id="3_3acmf"]
+[ext_resource type="Script" uid="uid://dkeusvrfxyf0x" path="res://scripts/level_2/level_logic_2.gd" id="3_a3l5x"]
 [ext_resource type="Texture2D" uid="uid://8tnd84iqcm6f" path="res://assets/sprites/city/Assets_City.png" id="3_c5o3r"]
+[ext_resource type="Script" uid="uid://vhrikkdvirs3" path="res://scripts/level_01/check_button.gd" id="3_c6rld"]
 [ext_resource type="PackedScene" uid="uid://b617fba8fvuvo" path="res://scenes/player/player.tscn" id="3_yjjx0"]
+[ext_resource type="Texture2D" uid="uid://7uq5jajupo7n" path="res://assets/sprites/button/button.png" id="4_yklhy"]
+[ext_resource type="PackedScene" uid="uid://tycds1sjjvs5" path="res://scenes/objects/graph_node.tscn" id="7_ppbiy"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_a3l5x"]
 distance = -45.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_o4ql5"]
+size = Vector2(43, 20)
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_c5o3r"]
 texture = ExtResource("3_c5o3r")
@@ -447,9 +455,79 @@ shape = SubResource("WorldBoundaryShape2D_a3l5x")
 [node name="Player" parent="." unique_id=1634076529 instance=ExtResource("3_yjjx0")]
 position = Vector2(0, -25)
 
+[node name="CheckButton" type="Node2D" parent="." unique_id=516063093]
+position = Vector2(1494, -182)
+script = ExtResource("3_c6rld")
+
+[node name="Sprite2D" type="Sprite2D" parent="CheckButton" unique_id=162455679]
+position = Vector2(-52, 102)
+scale = Vector2(0.11304346, 0.07968751)
+texture = ExtResource("4_yklhy")
+
+[node name="Area2D" type="Area2D" parent="CheckButton" unique_id=1195288178]
+position = Vector2(-37, 102)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CheckButton/Area2D" unique_id=519644301]
+position = Vector2(-15, -1)
+shape = SubResource("RectangleShape2D_o4ql5")
+
+[node name="NodeContainer" type="Node2D" parent="." unique_id=1502880504]
+position = Vector2(1494, -182)
+
+[node name="GraphNode" parent="NodeContainer" unique_id=944334433 node_paths=PackedStringArray("connected_nodes") instance=ExtResource("7_ppbiy")]
+light_mask = 2
+visibility_layer = 2
+position = Vector2(-1207, 157)
+node_value = 6
+connected_nodes = [NodePath("../GraphNode2"), NodePath("../GraphNode3")]
+
+[node name="GraphNode2" parent="NodeContainer" unique_id=685739583 node_paths=PackedStringArray("connected_nodes") instance=ExtResource("7_ppbiy")]
+position = Vector2(-989, 91)
+node_value = 6
+connected_nodes = [NodePath("../GraphNode4"), NodePath("../GraphNode5"), NodePath("../GraphNode6")]
+
+[node name="GraphNode3" parent="NodeContainer" unique_id=237013831 node_paths=PackedStringArray("connected_nodes") instance=ExtResource("7_ppbiy")]
+position = Vector2(-989, 174)
+node_value = 4
+connected_nodes = [NodePath("../GraphNode4"), NodePath("../GraphNode5"), NodePath("../GraphNode6")]
+
+[node name="GraphNode4" parent="NodeContainer" unique_id=629934482 node_paths=PackedStringArray("connected_nodes") instance=ExtResource("7_ppbiy")]
+position = Vector2(-860, 45)
+connected_nodes = [NodePath("../GraphNode7"), NodePath("../GraphNode8")]
+
+[node name="GraphNode5" parent="NodeContainer" unique_id=1897860538 node_paths=PackedStringArray("connected_nodes") instance=ExtResource("7_ppbiy")]
+position = Vector2(-814, 107)
+connected_nodes = [NodePath("../GraphNode7"), NodePath("../GraphNode8")]
+
+[node name="GraphNode6" parent="NodeContainer" unique_id=494715945 node_paths=PackedStringArray("connected_nodes") instance=ExtResource("7_ppbiy")]
+position = Vector2(-796, 171)
+connected_nodes = [NodePath("../GraphNode7"), NodePath("../GraphNode8")]
+
+[node name="GraphNode7" parent="NodeContainer" unique_id=205378113 node_paths=PackedStringArray("connected_nodes") instance=ExtResource("7_ppbiy")]
+position = Vector2(-630, 77)
+connected_nodes = [NodePath("../GraphNode9"), NodePath("../GraphNode10"), NodePath("../GraphNode11"), NodePath("../GraphNode12")]
+
+[node name="GraphNode8" parent="NodeContainer" unique_id=121794748 node_paths=PackedStringArray("connected_nodes") instance=ExtResource("7_ppbiy")]
+position = Vector2(-627, 142)
+connected_nodes = [NodePath("../GraphNode9"), NodePath("../GraphNode10"), NodePath("../GraphNode11"), NodePath("../GraphNode12")]
+
+[node name="GraphNode9" parent="NodeContainer" unique_id=1289018096 instance=ExtResource("7_ppbiy")]
+position = Vector2(-305, -21)
+
+[node name="GraphNode10" parent="NodeContainer" unique_id=1725450669 instance=ExtResource("7_ppbiy")]
+position = Vector2(-447, 45)
+
+[node name="GraphNode11" parent="NodeContainer" unique_id=1822634956 instance=ExtResource("7_ppbiy")]
+position = Vector2(-462, 107)
+
+[node name="GraphNode12" parent="NodeContainer" unique_id=167041425 instance=ExtResource("7_ppbiy")]
+position = Vector2(-344, 174)
+
 [node name="LevelLogic" type="Node2D" parent="." unique_id=1163777651]
+script = ExtResource("3_a3l5x")
 
 [node name="InputHandler" type="Node2D" parent="." unique_id=1364261457]
+script = ExtResource("3_3acmf")
 
 [node name="Background" type="TileMapLayer" parent="." unique_id=656803696]
 z_index = -1

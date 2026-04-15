@@ -1,7 +1,7 @@
 extends Node
 
 func _ready():
-	load_level("res://scenes/levels/level_01.tscn")
+	load_level("res://scenes/levels/level_02.tscn")
 	print("MAIN ЗАПУЩЕН")
 
 func load_level(path):

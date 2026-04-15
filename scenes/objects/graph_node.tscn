@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://tycds1sjjvs5"]
+
+[ext_resource type="Script" uid="uid://bn2lemyhfth65" path="res://scripts/level_2/graph_node.gd" id="1_mcw87"]
+[ext_resource type="Texture2D" uid="uid://buvj0jioatrwi" path="res://assets/sprites/sign/sign.png" id="2_n33py"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_atdyy"]
+
+[node name="GraphNode" type="Area2D" unique_id=944334433]
+script = ExtResource("1_mcw87")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1037403798]
+shape = SubResource("RectangleShape2D_atdyy")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1808188673]
+position = Vector2(0, -1.0000002)
+scale = Vector2(0.03203125, 0.043068174)
+texture = ExtResource("2_n33py")
+
+[node name="ValueLabel" type="Label" parent="." unique_id=2127719337]
+offset_left = -5.0
+offset_top = -12.0
+offset_right = 5.0
+offset_bottom = 11.0
+theme_override_font_sizes/font_size = 12
+text = "1"
+horizontal_alignment = 1

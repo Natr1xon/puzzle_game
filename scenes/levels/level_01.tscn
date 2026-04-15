@@ -1,11 +1,11 @@
 [gd_scene format=4 uid="uid://csaqxsulvx3u3"]
 
-[ext_resource type="Script" uid="uid://cbv8ucayt3g80" path="res://scripts/input_handler.gd" id="1_2djvx"]
+[ext_resource type="Script" uid="uid://cbv8ucayt3g80" path="res://scripts/level_01/input_handler_1.gd" id="1_2djvx"]
 [ext_resource type="PackedScene" uid="uid://d1n18f7d7hqr2" path="res://scenes/objects/coin.tscn" id="2_r72dd"]
-[ext_resource type="Script" uid="uid://bpi7jvc4hd0hl" path="res://scripts/level_logic.gd" id="2_uvc87"]
+[ext_resource type="Script" uid="uid://bpi7jvc4hd0hl" path="res://scripts/level_01/level_logic_1.gd" id="2_uvc87"]
 [ext_resource type="PackedScene" uid="uid://chs3ia44ls6on" path="res://scenes/objects/puzzle_object.tscn" id="3_qdh5e"]
 [ext_resource type="PackedScene" uid="uid://b617fba8fvuvo" path="res://scenes/player/player.tscn" id="4_uvc87"]
-[ext_resource type="Script" uid="uid://vhrikkdvirs3" path="res://scripts/check_button.gd" id="5_qdh5e"]
+[ext_resource type="Script" uid="uid://vhrikkdvirs3" path="res://scripts/level_01/check_button.gd" id="5_qdh5e"]
 [ext_resource type="Texture2D" uid="uid://8tnd84iqcm6f" path="res://assets/sprites/city/Assets_City.png" id="6_1ey3t"]
 [ext_resource type="Texture2D" uid="uid://7uq5jajupo7n" path="res://assets/sprites/button/button.png" id="6_50wog"]
 [ext_resource type="PackedScene" uid="uid://cf043gxy2xtfm" path="res://scenes/kill_zone.tscn" id="7_kfebt"]
@@ -431,9 +431,13 @@ texture = ExtResource("6_1ey3t")
 5:11/0 = 0
 4:11/0 = 0
 4:7/0 = 0
+4:7/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, -2.8263521, -8, -3.2374573)
+4:7/0/physics_layer_0/polygon_0/one_way = true
 4:8/0 = 0
 5:8/0 = 0
 5:7/0 = 0
+5:7/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, -2.8263521, -8, -3.2374573)
+5:7/0/physics_layer_0/polygon_0/one_way = true
 5:3/0 = 0
 5:4/0 = 0
 14:5/0 = 0

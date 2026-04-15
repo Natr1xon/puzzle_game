@@ -12,6 +12,7 @@ const ONE_WAY_LAYER = 2
 @onready var input_handler = get_node("../InputHandler")
 @onready var interaction_area = get_node_or_null("InteractionArea")
 
+
 func _ready():
 	floor_max_angle = deg_to_rad(75)
 	floor_stop_on_slope = false
@@ -89,7 +90,8 @@ func interact():
 		
 		if obj != null:
 			print("Выбрал:", obj.name)
-			input_handler.handle_interact(obj)
+			if input_handler and input_handler.has_method("handle_interact"):
+				input_handler.handle_interact(obj)
 			return
 
 	print("PuzzleObject не найден")

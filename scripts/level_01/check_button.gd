@@ -9,4 +9,4 @@ func interact():
 	scale = Vector2(1, 1)
 
 	var result = get_node("../LevelLogic").check_win()
-	get_node("../LevelLogic").check_answer(result)
+	#get_node("../LevelLogic").check_answer(result)

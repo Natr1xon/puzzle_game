@@ -13,9 +13,13 @@ func _ready():
 		if child.has_method("set_value"):
 			child.set_value(rng.randi_range(0, 9))
 
-func _on_button_pressed():
-	var result = check_win()
-	check_answer(result)
+	#var result = get_node("../LevelLogic").check_win()
+	#get_node("../LevelLogic").check_answer(result)
+
+#func _on_button_pressed():
+	#print("Lol")
+	#var result = check_win()
+	#check_answer(result)
 
 func get_objects():
 	var result = []

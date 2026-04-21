@@ -8,7 +8,7 @@ extends Area2D
 @onready var value_label: Label = $ValueLabel
 
 @export var min_value: int = 1
-@export var max_value: int = 10
+@export var max_value: int = 9
 
 signal player_entered(node)
 

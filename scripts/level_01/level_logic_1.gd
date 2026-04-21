@@ -13,14 +13,6 @@ func _ready():
 		if child.has_method("set_value"):
 			child.set_value(rng.randi_range(0, 9))
 
-	#var result = get_node("../LevelLogic").check_win()
-	#get_node("../LevelLogic").check_answer(result)
-
-#func _on_button_pressed():
-	#print("Lol")
-	#var result = check_win()
-	#check_answer(result)
-
 func get_objects():
 	var result = []
 	
@@ -43,9 +35,10 @@ func check_answer(is_correct: bool):
 	if not is_completed:
 		feedback_label.text = ""
 
-func check_win() -> bool:
+func check_win():
 	if is_completed:
-		return true
+		check_answer(true)
+		return 
 
 	var objects = get_objects()
 	var sorted = objects.duplicate()
@@ -56,7 +49,8 @@ func check_win() -> bool:
 
 	for i in range(sorted.size() - 1):
 		if sorted[i].get_value() > sorted[i + 1].get_value():
-			return false
+			check_answer(false)
+			return
 
 	is_completed = true
-	return true
+	check_answer(true)

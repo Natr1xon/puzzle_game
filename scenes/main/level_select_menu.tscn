@@ -1,0 +1,38 @@
+[gd_scene format=3 uid="uid://ciuw4bvq8iwy2"]
+
+[ext_resource type="Script" uid="uid://dpx8a0v4kngaf" path="res://scripts/level_select_menu.gd" id="1_js8mu"]
+
+[node name="LevelSelectMenu" type="Control" unique_id=24170390]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 43.0
+offset_top = 697.0
+offset_right = 1221.0
+offset_bottom = 697.0
+script = ExtResource("1_js8mu")
+
+[node name="Panel" type="Panel" parent="." unique_id=1497756196]
+z_index = -1
+layout_mode = 0
+offset_left = -41.0
+offset_top = -697.0
+offset_right = 1243.0
+offset_bottom = 23.0
+
+[node name="GridContainer" type="GridContainer" parent="." unique_id=1927381951]
+layout_mode = 0
+offset_top = -477.0
+offset_right = 40.0
+offset_bottom = -437.0
+theme_override_constants/h_separation = 179
+columns = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=676577866]
+layout_mode = 0
+offset_top = -32.0
+offset_right = 1194.0
+offset_bottom = -1.0
+
+[node name="BackButton" type="Button" parent="VBoxContainer" unique_id=1748828194]
+layout_mode = 2
+text = "Back"

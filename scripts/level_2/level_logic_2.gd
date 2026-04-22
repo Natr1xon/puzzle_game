@@ -1,4 +1,3 @@
-# Scripts/GraphManager.gd
 extends Node
 
 var current_node = null

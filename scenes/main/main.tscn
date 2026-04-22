@@ -1,16 +1,13 @@
 [gd_scene format=3 uid="uid://bubh3j1m1mm3j"]
 
 [ext_resource type="Script" uid="uid://becdj3hl8t230" path="res://scripts/main.gd" id="1_hyk8p"]
-[ext_resource type="Script" uid="uid://c5nmlyod6s2ad" path="res://scripts/main_menu.gd" id="2_iuonh"]
+[ext_resource type="Script" uid="uid://c5nmlyod6s2ad" path="res://scripts/ui/main_menu.gd" id="2_iuonh"]
 [ext_resource type="PackedScene" uid="uid://ciuw4bvq8iwy2" path="res://scenes/main/level_select_menu.tscn" id="3_k2fmo"]
+[ext_resource type="PackedScene" uid="uid://bqnjpn64268ul" path="res://scenes/ui/hud.tscn" id="4_l3cfh"]
+[ext_resource type="PackedScene" uid="uid://b2nx2pwtgt5l6" path="res://scenes/ui/game_menu.tscn" id="5_6q06x"]
 
 [node name="Node2D" type="Node2D" unique_id=550959682]
 script = ExtResource("1_hyk8p")
-
-[node name="Panel" type="Panel" parent="." unique_id=2023430301]
-z_index = -5
-offset_right = 1284.0
-offset_bottom = 720.0
 
 [node name="MainMenu" type="Control" parent="." unique_id=385006150]
 layout_mode = 3
@@ -19,6 +16,22 @@ offset_top = 610.0
 offset_right = 40.0
 offset_bottom = 650.0
 script = ExtResource("2_iuonh")
+
+[node name="Panel" type="Panel" parent="MainMenu" unique_id=2023430301]
+z_index = -5
+layout_mode = 0
+offset_top = -610.0
+offset_right = 1284.0
+offset_bottom = 110.0
+
+[node name="Label" type="Label" parent="MainMenu" unique_id=648107491]
+layout_mode = 0
+offset_top = -610.0
+offset_right = 1284.0
+offset_bottom = -511.0
+theme_override_font_sizes/font_size = 70
+text = "The puzzle game"
+horizontal_alignment = 1
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MainMenu" unique_id=129516220]
 layout_mode = 0
@@ -37,6 +50,11 @@ text = "Exit"
 
 [node name="LevelSelectMenu" parent="." unique_id=24170390 instance=ExtResource("3_k2fmo")]
 
+[node name="LevelContainer" type="Node" parent="." unique_id=1989351724]
+
 [node name="UI" type="CanvasLayer" parent="." unique_id=2023271584]
 
-[node name="LevelContainer" type="Node" parent="." unique_id=1989351724]
+[node name="game_menu" parent="UI" unique_id=114386644 instance=ExtResource("5_6q06x")]
+process_mode = 3
+
+[node name="HUD" parent="UI" unique_id=34537194 instance=ExtResource("4_l3cfh")]

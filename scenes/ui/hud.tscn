@@ -1,0 +1,38 @@
+[gd_scene format=3 uid="uid://bqnjpn64268ul"]
+
+[ext_resource type="Script" uid="uid://cflycggrswaa6" path="res://scripts/ui/hud.gd" id="1_0mwgc"]
+[ext_resource type="Texture2D" uid="uid://drh7xqg8aeob7" path="res://assets/sprites/coin/coin.png" id="2_hqnrr"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bo48s"]
+atlas = ExtResource("2_hqnrr")
+region = Rect2(0, 0, 16.571838, 16)
+
+[node name="HUD" type="Control" unique_id=34537194]
+z_index = 4
+layout_mode = 3
+anchors_preset = 0
+offset_right = 640.0
+offset_bottom = 194.0
+size_flags_horizontal = 0
+script = ExtResource("1_0mwgc")
+
+[node name="MenuButton" type="Button" parent="." unique_id=809250413]
+layout_mode = 0
+offset_left = 24.0
+offset_top = 24.0
+offset_right = 79.0
+offset_bottom = 64.0
+text = "Menu"
+
+[node name="CoinScoreLabel" type="Label" parent="." unique_id=1646150871]
+layout_mode = 0
+offset_left = 56.0
+offset_top = 75.0
+offset_right = 141.0
+offset_bottom = 98.0
+text = "Coin score:"
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=305264958]
+position = Vector2(41, 87.00001)
+scale = Vector2(1.875, 1.8749989)
+texture = SubResource("AtlasTexture_bo48s")

@@ -1,10 +1,16 @@
 extends Area2D
 
+signal player_killed
+
 @onready var timer: Timer = $Timer
 
+func _ready():
+	add_to_group("killzones")
+	
 func _on_body_entered(body: Node2D) -> void:
-	print("Перезапуск уровня")
-	timer.start()
+	if body.is_in_group("player"): 
+		print("Игрок умер")
+		timer.start()
 
 func _on_timer_timeout() -> void:
-	get_tree().reload_current_scene()
+	player_killed.emit()

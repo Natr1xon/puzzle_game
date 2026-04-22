@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://ciuw4bvq8iwy2"]
 
-[ext_resource type="Script" uid="uid://dpx8a0v4kngaf" path="res://scripts/level_select_menu.gd" id="1_js8mu"]
+[ext_resource type="Script" uid="uid://dpx8a0v4kngaf" path="res://scripts/ui/level_select_menu.gd" id="1_js8mu"]
 
 [node name="LevelSelectMenu" type="Control" unique_id=24170390]
 layout_mode = 3
@@ -14,9 +14,9 @@ script = ExtResource("1_js8mu")
 [node name="Panel" type="Panel" parent="." unique_id=1497756196]
 z_index = -1
 layout_mode = 0
-offset_left = -41.0
+offset_left = -47.0
 offset_top = -697.0
-offset_right = 1243.0
+offset_right = 1237.0
 offset_bottom = 23.0
 
 [node name="GridContainer" type="GridContainer" parent="." unique_id=1927381951]

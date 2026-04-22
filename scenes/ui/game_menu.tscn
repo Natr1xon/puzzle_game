@@ -1,0 +1,59 @@
+[gd_scene format=3 uid="uid://b2nx2pwtgt5l6"]
+
+[ext_resource type="Script" uid="uid://de3gbduv0g1bw" path="res://scripts/ui/game_menu.gd" id="1_5s0hc"]
+
+[node name="game_menu" type="Control" unique_id=114386644]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_5s0hc")
+
+[node name="Panel" type="Panel" parent="." unique_id=1017344356]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -100.0
+offset_top = -96.0
+offset_right = 100.0
+offset_bottom = 96.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel" unique_id=239680358]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -49.0
+offset_top = -64.0
+offset_right = 49.0
+offset_bottom = 64.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="Panel/VBoxContainer" unique_id=148292095]
+layout_mode = 2
+text = "Menu"
+horizontal_alignment = 1
+
+[node name="ResumeButton" type="Button" parent="Panel/VBoxContainer" unique_id=112416917]
+layout_mode = 2
+text = "Resume"
+
+[node name="LevelSelectButton" type="Button" parent="Panel/VBoxContainer" unique_id=167267577]
+layout_mode = 2
+text = "Level select"
+
+[node name="MainMenuButton" type="Button" parent="Panel/VBoxContainer" unique_id=1621688846]
+layout_mode = 2
+text = "Main menu"

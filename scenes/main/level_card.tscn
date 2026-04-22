@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://bdgepx40dcq4"]
 
-[ext_resource type="Script" uid="uid://c3o4028eektaw" path="res://scripts/level_card.gd" id="1_4papr"]
+[ext_resource type="Script" uid="uid://c3o4028eektaw" path="res://scripts/ui/level_card.gd" id="1_4papr"]
 [ext_resource type="Texture2D" uid="uid://c6bk8sn0k4mgl" path="res://assets/background/bluecity.jpg" id="2_pbfun"]
 
 [node name="LevelCard" type="Control" unique_id=1249149373]

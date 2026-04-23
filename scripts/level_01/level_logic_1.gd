@@ -33,11 +33,10 @@ func check_answer(is_correct: bool):
 	await get_tree().create_timer(2.0).timeout
 
 	if not is_completed:
-		feedback_label.text = ""
+		feedback_label.text = "Try again"
 
 func check_win():
 	if is_completed:
-		check_answer(true)
 		return 
 
 	var objects = get_objects()

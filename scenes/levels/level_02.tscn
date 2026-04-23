@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://butwwa1httray" path="res://scripts/level_2/input_handler_2.gd" id="3_3acmf"]
 [ext_resource type="Script" uid="uid://dkeusvrfxyf0x" path="res://scripts/level_2/level_logic_2.gd" id="3_a3l5x"]
 [ext_resource type="Texture2D" uid="uid://8tnd84iqcm6f" path="res://assets/sprites/city/Assets_City.png" id="3_c5o3r"]
-[ext_resource type="Script" uid="uid://vhrikkdvirs3" path="res://scripts/level_01/check_button.gd" id="3_c6rld"]
+[ext_resource type="Script" uid="uid://vhrikkdvirs3" path="res://scripts/objects/check_button.gd" id="3_c6rld"]
 [ext_resource type="PackedScene" uid="uid://b617fba8fvuvo" path="res://scenes/player/player.tscn" id="3_yjjx0"]
 [ext_resource type="PackedScene" uid="uid://d1n18f7d7hqr2" path="res://scenes/objects/coin.tscn" id="3_yklhy"]
 [ext_resource type="Texture2D" uid="uid://7uq5jajupo7n" path="res://assets/sprites/button/button.png" id="4_yklhy"]
@@ -526,10 +526,10 @@ position = Vector2(1287, -73)
 [node name="Coin5" parent="CoinContainer" unique_id=1628219278 groups=["coins"] instance=ExtResource("3_yklhy")]
 position = Vector2(864, -56)
 
-[node name="Coin6" parent="CoinContainer" unique_id=1541383154 instance=ExtResource("3_yklhy")]
+[node name="Coin6" parent="CoinContainer" unique_id=1541383154 groups=["coins"] instance=ExtResource("3_yklhy")]
 position = Vector2(1137, -201)
 
-[node name="Coin7" parent="CoinContainer" unique_id=2007950043 instance=ExtResource("3_yklhy")]
+[node name="Coin7" parent="CoinContainer" unique_id=2007950043 groups=["coins"] instance=ExtResource("3_yklhy")]
 position = Vector2(105, -10)
 
 [node name="CheckButton" type="Node2D" parent="." unique_id=516063093]

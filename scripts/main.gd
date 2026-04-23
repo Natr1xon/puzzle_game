@@ -6,6 +6,7 @@ extends Node
 @onready var ui = $UI
 @onready var hud = $UI/HUD
 @onready var game_menu = $UI/game_menu
+@onready var resume_button = $UI/game_menu/Panel/VBoxContainer/ResumeButton
 
 var current_level_path = ""
 
@@ -21,6 +22,13 @@ func _ready():
 	menu.show()
 	level_select.hide()
 	ui.hide()
+	
+	var shortcut = Shortcut.new()
+	
+	var events = InputMap.action_get_events("game_menu")
+	if events.size() > 0:
+		shortcut.events = events
+		resume_button.shortcut = shortcut
 
 	menu.start_game.connect(_on_start_game)
 

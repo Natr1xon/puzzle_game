@@ -5,7 +5,7 @@
 [ext_resource type="Script" uid="uid://bpi7jvc4hd0hl" path="res://scripts/level_01/level_logic_1.gd" id="2_uvc87"]
 [ext_resource type="PackedScene" uid="uid://chs3ia44ls6on" path="res://scenes/objects/puzzle_object.tscn" id="3_qdh5e"]
 [ext_resource type="PackedScene" uid="uid://b617fba8fvuvo" path="res://scenes/player/player.tscn" id="4_uvc87"]
-[ext_resource type="Script" uid="uid://vhrikkdvirs3" path="res://scripts/level_01/check_button.gd" id="5_qdh5e"]
+[ext_resource type="Script" uid="uid://vhrikkdvirs3" path="res://scripts/objects/check_button.gd" id="5_qdh5e"]
 [ext_resource type="Texture2D" uid="uid://8tnd84iqcm6f" path="res://assets/sprites/city/Assets_City.png" id="6_1ey3t"]
 [ext_resource type="Texture2D" uid="uid://7uq5jajupo7n" path="res://assets/sprites/button/button.png" id="6_50wog"]
 [ext_resource type="PackedScene" uid="uid://cf043gxy2xtfm" path="res://scenes/kill_zone.tscn" id="7_kfebt"]
@@ -546,7 +546,6 @@ position = Vector2(13, -13)
 shape = SubResource("WorldBoundaryShape2D_kfebt")
 
 [node name="Background" type="Sprite2D" parent="." unique_id=1267091804]
-visible = false
 z_index = -2
 position = Vector2(257, -179)
 scale = Vector2(-1.976, 1)

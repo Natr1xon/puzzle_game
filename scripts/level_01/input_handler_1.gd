@@ -1,17 +1,19 @@
 extends Node
 
 var selected_object = null
+var previous_modulate = Color.WHITE
 
 func try_swap(a, b) -> bool:
 	if can_swap(a, b):
-		var temp = a.global_position
-		a.global_position = b.global_position
-		b.global_position = temp
-		print("swap")
+		var tween = a.create_tween()
+		tween.set_parallel(true)
+		tween.tween_property(a, "global_position", b.global_position, 0.2)
+		tween.tween_property(b, "global_position", a.global_position, 0.2)
+
+		await tween.finished
+		print("swap complete")
 		return true
-	else:
-		print("can't swap")
-		return false
+	return false
 
 func can_swap(a, b) -> bool:
 	if not a.has_method("get_value") or not b.has_method("get_value"):
@@ -27,30 +29,33 @@ func can_swap(a, b) -> bool:
 	
 func handle_interact(obj):
 	if not is_instance_valid(obj):
-		print("Объект невалиден")
 		return
 
 	if not obj.has_method("get_value"):
-		print("Не puzzle object")
 		return
 
-	# первый выбор
+	# Первый выбор
 	if selected_object == null:
+		obj.highlight(true) 
 		selected_object = obj
-		print("Первый объект выбран:", obj.name)
+		print("Выбран:", obj.name)
 		return
 
-	# клик по тому же объекту
+	# Тот же объект - отмена
 	if selected_object == obj:
-		print("Тот же объект — отмена выбора")
+		obj.highlight(false)  
 		selected_object = null
+		print("Отмена выбора")
 		return
 
-	print("Пытаемся свапнуть:", selected_object.name, obj.name)
+	# Пытаемся свапнуть
+	print("Свап между:", selected_object.name, obj.name)
 
-	if try_swap(selected_object, obj):
+	if await try_swap(selected_object, obj):
 		print("Свап успешен")
+		selected_object.highlight(false)  
 	else:
-		print("Свап запрещён")
+		print("Свап невозможен")
+		selected_object.highlight(false) 
 
 	selected_object = null

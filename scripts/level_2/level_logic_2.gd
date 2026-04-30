@@ -4,11 +4,14 @@ var current_node = null
 var all_nodes = []
 var total_value: int = 0
 var player_path: Array = []
+var drawn_connections = {}
 
 signal node_reached(node)
 signal travel_failed(reason)
 
 @onready var feedback_label = $"../Player/FeedbackLabel"
+@onready var connection_container = $"../Connections"
+@onready var main = get_tree().root.get_node("Main")
 
 func _ready():
 	feedback_label.text = ' '
@@ -33,6 +36,40 @@ func show_feedback(text: String, duration: float = 1.0):
 	var tween = create_tween()
 	tween.tween_property(feedback_label, "modulate:a", 0.0, 0.5)
 
+func draw_connection(a, b):
+	var key = str(a.get_instance_id()) + "_" + str(b.get_instance_id())
+	var reverse_key = str(b.get_instance_id()) + "_" + str(a.get_instance_id())
+	
+	if key in drawn_connections or reverse_key in drawn_connections:
+		return
+	
+	var line = Line2D.new()
+	
+	line.modulate.a = 0.0
+
+	var tween = create_tween()
+	tween.tween_property(line, "modulate:a", 1.0, 0.3)
+	
+	line.width = 1.5
+	line.default_color = Color(0.7, 0.7, 1)
+	line.antialiased = true
+	
+	line.add_point(a.global_position)
+	line.add_point(b.global_position)
+	
+	connection_container.add_child(line)
+	
+	drawn_connections[key] = line
+	
+func highlight_connection(a, b):
+	var key = str(a.get_instance_id()) + "_" + str(b.get_instance_id())
+	var reverse_key = str(b.get_instance_id()) + "_" + str(a.get_instance_id())
+	
+	var line = drawn_connections.get(key, drawn_connections.get(reverse_key))
+	
+	if line:
+		line.default_color = Color(0.102, 1.0, 0.302, 0.816) 
+
 func _on_player_reached_node(node):
 	print("🚶 Игрок достиг узла: ", node.node_name)
 	
@@ -44,9 +81,20 @@ func _on_player_reached_node(node):
 		current_node = old_node
 		travel_failed.emit("Путь закрыт")
 		return
+
+	for neighbor in node.connected_nodes:
+		draw_connection(node, neighbor)
+	
+	if old_node:
+		highlight_connection(old_node, node)
 	
 	total_value += node.node_value
 	player_path.append(node)
+	
+	node.set_visited()
+
+	if main:
+		main.update_hud_sum(total_value)
 	
 	node_reached.emit(node)
 	print("✅ Текущий узел: ", node.node_name, 
@@ -69,6 +117,9 @@ func get_total_value() -> int:
 	
 func reset_total():
 	total_value = 0
+	
+	if main:
+		main.update_hud_sum(0)
 
 func get_current_value() -> int:
 	return current_node.node_value if current_node else 0

@@ -182,9 +182,8 @@ script = ExtResource("1_g2els")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=394219409]
 sprite_frames = SubResource("SpriteFrames_tuyoq")
-animation = &"run"
+animation = &"idle"
 autoplay = "idle"
-frame_progress = 0.79972863
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1645753426]
 position = Vector2(-0.125, 5)

@@ -10,6 +10,8 @@ extends Area2D
 @export var min_value: int = 1
 @export var max_value: int = 9
 
+var is_visited: bool = false
+
 signal player_entered(node)
 
 func _ready():
@@ -18,6 +20,12 @@ func _ready():
 	update_display()
 	add_to_group("travel_nodes")
 	body_entered.connect(_on_body_entered)
+	
+func set_visited():
+	is_visited = true
+	
+	if sprite:
+		sprite.modulate = Color(0.5, 1, 0.5) # зелёная подсветка
 
 func update_display():
 	if value_label:

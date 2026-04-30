@@ -8,6 +8,7 @@ extends Node
 @onready var game_menu = $UI/game_menu
 @onready var resume_button = $UI/game_menu/Panel/VBoxContainer/ResumeButton
 
+
 var current_level_path = ""
 
 var coins := 0
@@ -53,7 +54,10 @@ func _on_level_selected(path):
 
 	ui.show()
 	hud.show()
-
+	if "level_02" in current_level_path:
+		hud.show_sum()
+	else:
+		hud.hide_sum()
 
 	game_menu.hide()
 	get_tree().paused = false
@@ -93,6 +97,9 @@ func _on_main_menu_from_game():
 	hud.hide()
 
 	menu.show()
+	
+func update_hud_sum(value: int):
+	hud.update_sum(value)
 
 func load_level(path):
 	current_level_path = path
@@ -108,7 +115,8 @@ func load_level(path):
 	$LevelContainer.add_child(level)
 	
 	for coin in get_tree().get_nodes_in_group("coins"):
-		coin.collected.connect(add_coin)
+		if not coin.collected.is_connected(add_coin):
+			coin.collected.connect(add_coin)
 
 	var killzone = level.get_node_or_null("KillZone")
 	if killzone:

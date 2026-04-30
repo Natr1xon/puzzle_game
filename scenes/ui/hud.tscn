@@ -26,13 +26,23 @@ text = "Menu"
 
 [node name="CoinScoreLabel" type="Label" parent="." unique_id=1646150871]
 layout_mode = 0
-offset_left = 56.0
-offset_top = 75.0
-offset_right = 141.0
-offset_bottom = 98.0
+offset_left = 64.0
+offset_top = 72.0
+offset_right = 191.0
+offset_bottom = 107.0
+theme_override_font_sizes/font_size = 24
 text = "Coin score:"
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=305264958]
-position = Vector2(41, 87.00001)
-scale = Vector2(1.875, 1.8749989)
+position = Vector2(40, 87.99999)
+scale = Vector2(2.4375, 2.437499)
 texture = SubResource("AtlasTexture_bo48s")
+
+[node name="SumGraphs" type="Label" parent="." unique_id=120869793]
+layout_mode = 0
+offset_left = 24.0
+offset_top = 107.0
+offset_right = 252.0
+offset_bottom = 141.0
+theme_override_font_sizes/font_size = 24
+text = "Sum graph nodes: 0"

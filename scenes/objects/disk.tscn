@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://bs6h4nayn6loc"]
+
+[ext_resource type="Script" uid="uid://cpqv4ajatynru" path="res://scripts/disk.gd" id="1_y1rs8"]
+
+[node name="Disk" type="ColorRect" unique_id=986603116]
+offset_right = 125.0
+offset_bottom = 11.0
+color = Color(0.050980393, 0.38039216, 1, 1)
+script = ExtResource("1_y1rs8")

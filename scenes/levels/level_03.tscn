@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://d4fbki7y8fnvj"]
 
 [ext_resource type="Texture2D" uid="uid://8tnd84iqcm6f" path="res://assets/sprites/city/Assets_City.png" id="1_fvfhs"]
+[ext_resource type="Script" uid="uid://deo44mphbtkho" path="res://scripts/level_3/level_logic_3.gd" id="2_o4mod"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_o4mod"]
 texture = ExtResource("1_fvfhs")
@@ -384,10 +385,45 @@ texture = ExtResource("1_fvfhs")
 [sub_resource type="TileSet" id="TileSet_lcxk4"]
 sources/0 = SubResource("TileSetAtlasSource_ps4tf")
 
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_4wrbh"]
+
 [node name="Level" type="Node2D" unique_id=847719169]
+metadata/_edit_vertical_guides_ = [640.0, 1280.0, 0.0, 320.0, 970.0]
+metadata/_edit_horizontal_guides_ = [0.0, 720.0, 360.0]
 
 [node name="Back" type="TileMapLayer" parent="." unique_id=575311669]
 tile_set = SubResource("TileSet_4wrbh")
 
 [node name="Mid" type="TileMapLayer" parent="Back" unique_id=965205425]
 tile_set = SubResource("TileSet_lcxk4")
+
+[node name="Pegs" type="Node2D" parent="." unique_id=309709228]
+
+[node name="Peg1" type="Node2D" parent="Pegs" unique_id=1157497655]
+position = Vector2(320, 55)
+
+[node name="Sprite2D" type="Sprite2D" parent="Pegs/Peg1" unique_id=1644180256]
+position = Vector2(0, 155)
+scale = Vector2(15.999999, 305.62506)
+texture = SubResource("PlaceholderTexture2D_4wrbh")
+
+[node name="Peg2" type="Node2D" parent="Pegs" unique_id=628697524]
+position = Vector2(640, 55)
+
+[node name="Sprite2D" type="Sprite2D" parent="Pegs/Peg2" unique_id=768150639]
+position = Vector2(0, 155)
+scale = Vector2(15.999999, 305.62506)
+texture = SubResource("PlaceholderTexture2D_4wrbh")
+
+[node name="Peg3" type="Node2D" parent="Pegs" unique_id=2015472413]
+position = Vector2(970, 55)
+
+[node name="Sprite2D" type="Sprite2D" parent="Pegs/Peg3" unique_id=181882116]
+position = Vector2(0, 155)
+scale = Vector2(15.999999, 305.62506)
+texture = SubResource("PlaceholderTexture2D_4wrbh")
+
+[node name="Disks" type="Node2D" parent="." unique_id=277742760]
+
+[node name="LevelLogic" type="Node2D" parent="." unique_id=669914656]
+script = ExtResource("2_o4mod")

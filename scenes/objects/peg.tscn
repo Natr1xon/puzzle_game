@@ -7,6 +7,9 @@
 atlas = ExtResource("2_866lr")
 region = Rect2(212, 0, 8, 48)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ptumh"]
+size = Vector2(8, 144)
+
 [node name="Peg" type="Node2D" unique_id=870553154]
 script = ExtResource("1_ptumh")
 
@@ -14,3 +17,9 @@ script = ExtResource("1_ptumh")
 position = Vector2(2.861023e-06, 31.999998)
 scale = Vector2(1.0000002, 2.8333333)
 texture = SubResource("AtlasTexture_ps4tf")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=827994956]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1707657332]
+position = Vector2(0, 32)
+shape = SubResource("RectangleShape2D_ptumh")

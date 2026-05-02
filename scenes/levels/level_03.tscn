@@ -428,9 +428,11 @@ position = Vector2(-128, -88)
 
 [node name="Peg2" parent="Pegs" unique_id=1146229524 instance=ExtResource("4_1jnh5")]
 position = Vector2(0, -88)
+index = 1
 
 [node name="Peg3" parent="Pegs" unique_id=1083744063 instance=ExtResource("4_1jnh5")]
 position = Vector2(128, -87)
+index = 2
 
 [node name="Disks" type="Node2D" parent="." unique_id=277742760]
 z_index = 4

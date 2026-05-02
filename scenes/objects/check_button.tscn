@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://bhj8yhsi6w7tb"]
+
+[ext_resource type="Script" uid="uid://vhrikkdvirs3" path="res://scripts/objects/check_button.gd" id="1_p0gap"]
+[ext_resource type="Texture2D" uid="uid://7uq5jajupo7n" path="res://assets/sprites/button/button.png" id="2_n0cl5"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sb2pr"]
+size = Vector2(43, 20)
+
+[node name="ChecButton" type="Area2D" unique_id=1573709163]
+script = ExtResource("1_p0gap")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1922610584]
+position = Vector2(0, -0.25)
+shape = SubResource("RectangleShape2D_sb2pr")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1543268741]
+position = Vector2(3.0517578e-05, 0.7499924)
+scale = Vector2(0.11304346, 0.07968751)
+texture = ExtResource("2_n0cl5")

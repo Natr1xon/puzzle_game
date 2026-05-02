@@ -2,6 +2,7 @@ extends Node
 
 var is_completed = false
 
+
 @onready var feedback_label = $"../FeedbackLabel"
 
 func _ready():

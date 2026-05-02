@@ -5,14 +5,10 @@
 [ext_resource type="Script" uid="uid://bpi7jvc4hd0hl" path="res://scripts/level_01/level_logic_1.gd" id="2_uvc87"]
 [ext_resource type="PackedScene" uid="uid://chs3ia44ls6on" path="res://scenes/objects/puzzle_object.tscn" id="3_qdh5e"]
 [ext_resource type="PackedScene" uid="uid://b617fba8fvuvo" path="res://scenes/player/player.tscn" id="4_uvc87"]
-[ext_resource type="Script" uid="uid://vhrikkdvirs3" path="res://scripts/objects/check_button.gd" id="5_qdh5e"]
 [ext_resource type="Texture2D" uid="uid://8tnd84iqcm6f" path="res://assets/sprites/city/Assets_City.png" id="6_1ey3t"]
-[ext_resource type="Texture2D" uid="uid://7uq5jajupo7n" path="res://assets/sprites/button/button.png" id="6_50wog"]
+[ext_resource type="PackedScene" uid="uid://bhj8yhsi6w7tb" path="res://scenes/objects/check_button.tscn" id="6_kfebt"]
 [ext_resource type="PackedScene" uid="uid://cf043gxy2xtfm" path="res://scenes/kill_zone.tscn" id="7_kfebt"]
 [ext_resource type="Texture2D" uid="uid://cqvlxh1x71a5r" path="res://assets/background/bluecity.jpg" id="10_r72dd"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_50wog"]
-size = Vector2(43, 20)
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_r72dd"]
 texture = ExtResource("6_1ey3t")
@@ -504,21 +500,8 @@ position = Vector2(556, -102)
 [node name="Coin5" parent="CoinContainer" unique_id=982289458 groups=["coins"] instance=ExtResource("2_r72dd")]
 position = Vector2(-86, -38)
 
-[node name="CheckButton" type="Node2D" parent="." unique_id=1808353633]
-position = Vector2(438, -180)
-script = ExtResource("5_qdh5e")
-
-[node name="Sprite2D" type="Sprite2D" parent="CheckButton" unique_id=924133208]
-position = Vector2(-52, 102)
-scale = Vector2(0.11304346, 0.07968751)
-texture = ExtResource("6_50wog")
-
-[node name="Area2D" type="Area2D" parent="CheckButton" unique_id=1283344456]
-position = Vector2(-37, 102)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CheckButton/Area2D" unique_id=694924043]
-position = Vector2(-15, -1)
-shape = SubResource("RectangleShape2D_50wog")
+[node name="CheckButton" parent="." unique_id=1573709163 instance=ExtResource("6_kfebt")]
+position = Vector2(386, -79)
 
 [node name="FeedbackLabel" type="Label" parent="." unique_id=651166233]
 offset_left = 346.0

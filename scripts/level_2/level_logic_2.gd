@@ -17,6 +17,8 @@ func _ready():
 	await get_tree().process_frame
 	find_all_nodes()
 	
+	reset_total()
+	
 	for node in all_nodes:
 		if node.has_signal("player_entered"):
 			node.player_entered.connect(_on_player_reached_node)
@@ -94,8 +96,8 @@ func can_travel(from_node, to_node) -> bool:
 	if from_node == null:
 		return true 
 	
-	var is_connected = to_node in from_node.connected_nodes
-	if not is_connected:
+	var is_connected_node = to_node in from_node.connected_nodes
+	if not is_connected_node:
 		print("⚠️ Узлы ", from_node.node_name, " и ", to_node.node_name, " не связаны!")
 		return false
 	
@@ -130,29 +132,29 @@ func find_shortest_path(start_node, end_node):
 	distances[start_node] = 0
 
 	while unvisited.size() > 0:
-		var current = unvisited[0]
+		var current_node_path = unvisited[0]
 		for node in unvisited:
-			if distances[node] < distances[current]:
-				current = node
+			if distances[node] < distances[current_node_path]:
+				current_node_path = node
 				
-		if current == end_node:
+		if current_node_path == end_node:
 			break
 
-		unvisited.erase(current)
+		unvisited.erase(current_node_path)
 
-		for neighbor in current.connected_nodes:
-			var new_dist = distances[current] + neighbor.node_value
+		for neighbor in current_node_path.connected_nodes:
+			var new_dist = distances[current_node_path] + neighbor.node_value
 			
 			if new_dist < distances[neighbor]:
 				distances[neighbor] = new_dist
-				previous[neighbor] = current
+				previous[neighbor] = current_node_path
 
 	var path = []
-	var current = end_node
+	var current_path_node = end_node
 	
-	while current != null:
-		path.insert(0, current)
-		current = previous[current]
+	while current_path_node != null:
+		path.insert(0, current_path_node)
+		current_path_node = previous[current_path_node]
 
 	return path
 

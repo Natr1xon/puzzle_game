@@ -40,8 +40,7 @@ func interact_with_current_peg():
 	if current_near_peg == -1:
 		Notify.warn("Подойдите к колышку!")
 		return false
-	
-	# Передаем в InputHandler
+
 	if input_handler:
 		input_handler.handle_peg_clicked(current_near_peg)
 	else:

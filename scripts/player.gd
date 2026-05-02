@@ -47,8 +47,9 @@ func _physics_process(delta: float) -> void:
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 	
-	# ВЗАИМОДЕЙСТВИЕ С БАШНЕЙ
 	if Input.is_action_just_pressed("interact"):
+		interact_with_button()
+		interact_with_puzzle()
 		interact_with_tower()
 
 	move_and_slide()
@@ -57,6 +58,36 @@ func interact_with_tower():
 	var level_logic = get_node("../LevelLogic")
 	if level_logic and level_logic.has_method("interact_with_current_peg"):
 		level_logic.interact_with_current_peg()
+		
+func interact_with_puzzle():
+	if input_handler and input_handler.has_method("handle_interact"):
+		var nearest = find_nearest_puzzle_object()
+		if nearest:
+			input_handler.handle_interact(nearest)
+		else:
+			print("Нет puzzle object рядом")
+
+func interact_with_button():
+	var buttons = get_tree().get_nodes_in_group("check_buttons")
+	for button in buttons:
+		var distance = global_position.distance_to(button.global_position)
+		if distance < 30:
+			if button.has_method("interact"):
+				button.interact()
+			return
+
+func find_nearest_puzzle_object():
+	var puzzle_objects = get_tree().get_nodes_in_group("puzzle_objects")
+	var nearest = null
+	var min_distance = 10.0
+	
+	for obj in puzzle_objects:
+		var distance = global_position.distance_to(obj.global_position)
+		if distance < min_distance:
+			min_distance = distance
+			nearest = obj
+	
+	return nearest
 
 func pass_through_one_way_platform():
 	var layer_bit = 1 << (ONE_WAY_LAYER - 1)  
@@ -67,31 +98,3 @@ func pass_through_one_way_platform():
 	await get_tree().create_timer(0.2).timeout
 	collision_mask |= layer_bit
 	is_passing_through = false
-
-func interact():
-	if interaction_area == null:
-		print("InteractionArea НЕ НАЙДЕН!")
-		return
-
-	var areas = interaction_area.get_overlapping_areas()
-
-	if areas.size() == 0:
-		return
-
-	for area in areas:
-		var obj = area
-		
-		if obj.get_parent().has_method("interact"):
-			obj.get_parent().interact()
-			return
-
-		while obj != null and not obj.has_method("get_value"):
-			obj = obj.get_parent()
-		
-		if obj != null:
-			print("Выбрал:", obj.name)
-			if input_handler and input_handler.has_method("handle_interact"):
-				input_handler.handle_interact(obj)
-			return
-
-	print("PuzzleObject не найден")

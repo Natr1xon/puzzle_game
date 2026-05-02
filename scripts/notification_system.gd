@@ -39,20 +39,20 @@ func show_next_message():
 	is_showing = true
 	var msg = message_queue.pop_front()
 	
-	var notification = create_notification(msg.text)
-	add_child(notification)
+	var msg_panel = create_notification(msg.text)
+	add_child(msg_panel)
 	
-	notification.modulate = Color(1, 1, 1, 0)
+	msg_panel.modulate = Color(1, 1, 1, 0)
 	var tween = create_tween()
-	tween.tween_property(notification, "modulate", Color(1, 1, 1, 1), 0.2)
+	tween.tween_property(msg_panel, "modulate", Color(1, 1, 1, 1), 0.2)
 	
 	await get_tree().create_timer(msg.duration).timeout
 	
-	if notification and is_instance_valid(notification):
+	if msg_panel and is_instance_valid(msg_panel):
 		tween = create_tween()
-		tween.tween_property(notification, "modulate", Color(1, 1, 1, 0), 0.2)
+		tween.tween_property(msg_panel, "modulate", Color(1, 1, 1, 0), 0.2)
 		await tween.finished
-		notification.queue_free()
+		msg_panel.queue_free()
 	
 	await get_tree().create_timer(0.1).timeout
 	show_next_message()

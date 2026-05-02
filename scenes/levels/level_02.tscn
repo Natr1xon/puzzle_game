@@ -5,15 +5,11 @@
 [ext_resource type="Script" uid="uid://butwwa1httray" path="res://scripts/level_2/input_handler_2.gd" id="3_3acmf"]
 [ext_resource type="Script" uid="uid://dkeusvrfxyf0x" path="res://scripts/level_2/level_logic_2.gd" id="3_a3l5x"]
 [ext_resource type="Texture2D" uid="uid://8tnd84iqcm6f" path="res://assets/sprites/city/Assets_City.png" id="3_c5o3r"]
-[ext_resource type="Script" uid="uid://vhrikkdvirs3" path="res://scripts/objects/check_button.gd" id="3_c6rld"]
 [ext_resource type="PackedScene" uid="uid://b617fba8fvuvo" path="res://scenes/player/player.tscn" id="3_yjjx0"]
 [ext_resource type="PackedScene" uid="uid://d1n18f7d7hqr2" path="res://scenes/objects/coin.tscn" id="3_yklhy"]
-[ext_resource type="Texture2D" uid="uid://7uq5jajupo7n" path="res://assets/sprites/button/button.png" id="4_yklhy"]
 [ext_resource type="PackedScene" uid="uid://tycds1sjjvs5" path="res://scenes/objects/graph_node.tscn" id="7_ppbiy"]
+[ext_resource type="PackedScene" uid="uid://bhj8yhsi6w7tb" path="res://scenes/objects/check_button.tscn" id="7_yklhy"]
 [ext_resource type="Texture2D" uid="uid://b7eor2q4j7nrw" path="res://assets/background/sunsetcity.png" id="9_c6rld"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_o4ql5"]
-size = Vector2(43, 20)
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_c5o3r"]
 texture = ExtResource("3_c5o3r")
@@ -548,21 +544,8 @@ position = Vector2(1254, -201)
 [node name="Coin7" parent="CoinContainer" unique_id=2007950043 groups=["coins"] instance=ExtResource("3_yklhy")]
 position = Vector2(105, -10)
 
-[node name="CheckButton" type="Node2D" parent="." unique_id=516063093]
-position = Vector2(1588, -78)
-script = ExtResource("3_c6rld")
-
-[node name="Sprite2D" type="Sprite2D" parent="CheckButton" unique_id=162455679]
-position = Vector2(-42, 1.7500076)
-scale = Vector2(0.11304346, 0.07968751)
-texture = ExtResource("4_yklhy")
-
-[node name="Area2D" type="Area2D" parent="CheckButton" unique_id=1195288178]
-position = Vector2(-27, 1.75)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CheckButton/Area2D" unique_id=519644301]
-position = Vector2(-15, -1)
-shape = SubResource("RectangleShape2D_o4ql5")
+[node name="CheckButton" parent="." unique_id=1573709163 instance=ExtResource("7_yklhy")]
+position = Vector2(1566, -81)
 
 [node name="Back" type="TileMapLayer" parent="." unique_id=656803696]
 z_index = -1

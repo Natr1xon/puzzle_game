@@ -33,7 +33,7 @@ func check_answer(is_correct: bool):
 	await get_tree().create_timer(2.0).timeout
 
 	if not is_completed:
-		feedback_label.text = "Try again"
+		Notify.info("Сортируй по возрастанию", 5.0)
 
 func check_win():
 	if is_completed:

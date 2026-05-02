@@ -2,7 +2,7 @@ extends Area2D
 
 @export var node_name: String = "Node"
 @export var node_value: int = 0
-@export var connected_nodes: Array[Node] = []  # соседние узлы
+@export var connected_nodes: Array[Node] = []  
 
 @onready var sprite: Sprite2D = $Sprite2D
 @onready var value_label: Label = $ValueLabel
@@ -25,7 +25,7 @@ func set_visited():
 	is_visited = true
 	
 	if sprite:
-		sprite.modulate = Color(0.5, 1, 0.5) # зелёная подсветка
+		sprite.modulate = Color(0.5, 1, 0.5) 
 
 func update_display():
 	if value_label:

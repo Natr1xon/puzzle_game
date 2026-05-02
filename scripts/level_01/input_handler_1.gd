@@ -1,7 +1,6 @@
 extends Node
 
 var selected_object = null
-var previous_modulate = Color.WHITE
 
 func try_swap(a, b) -> bool:
 	if can_swap(a, b):
@@ -13,18 +12,12 @@ func try_swap(a, b) -> bool:
 		await tween.finished
 		print("swap complete")
 		return true
+	
 	return false
 
 func can_swap(a, b) -> bool:
 	if not a.has_method("get_value") or not b.has_method("get_value"):
 		return false
-	
-	var distance = a.global_position.distance_to(b.global_position)
-	
-	if distance > 25:
-		print("Слишком далеко")
-		return false
-	
 	return true
 	
 func handle_interact(obj):
@@ -34,21 +27,20 @@ func handle_interact(obj):
 	if not obj.has_method("get_value"):
 		return
 
-	# Первый выбор
 	if selected_object == null:
 		obj.highlight(true) 
 		selected_object = obj
 		print("Выбран:", obj.name)
+		Notify.info("Выбран объект: " + str(obj.get_value()), 1.0)
 		return
 
-	# Тот же объект - отмена
 	if selected_object == obj:
 		obj.highlight(false)  
 		selected_object = null
 		print("Отмена выбора")
+		Notify.info("Выбор отменен", 1.0)
 		return
 
-	# Пытаемся свапнуть
 	print("Свап между:", selected_object.name, obj.name)
 
 	if await try_swap(selected_object, obj):

@@ -453,15 +453,16 @@ sources/0 = SubResource("TileSetAtlasSource_t0hvh")
 
 [node name="Level" type="Node2D" unique_id=874728854]
 
+[node name="LevelLogic" type="Node2D" parent="." unique_id=1350214831]
+position = Vector2(288, -42)
+script = ExtResource("2_uvc87")
+
+[node name="InputHandler" type="Node2D" parent="." unique_id=799739]
+position = Vector2(309, -47)
+script = ExtResource("1_2djvx")
+
 [node name="Player" parent="." unique_id=926706326 groups=["player"] instance=ExtResource("4_uvc87")]
 position = Vector2(-53, -31)
-
-[node name="FeedbackLabel" type="Label" parent="." unique_id=651166233]
-offset_left = 346.0
-offset_top = -135.0
-offset_right = 426.0
-offset_bottom = -112.0
-text = "Sort"
 
 [node name="PuzzleContainer" type="Node2D" parent="." unique_id=374046875]
 position = Vector2(204, -67)
@@ -519,13 +520,12 @@ position = Vector2(-37, 102)
 position = Vector2(-15, -1)
 shape = SubResource("RectangleShape2D_50wog")
 
-[node name="InputHandler" type="Node2D" parent="." unique_id=799739]
-position = Vector2(309, -47)
-script = ExtResource("1_2djvx")
-
-[node name="LevelLogic" type="Node2D" parent="." unique_id=1350214831]
-position = Vector2(288, -42)
-script = ExtResource("2_uvc87")
+[node name="FeedbackLabel" type="Label" parent="." unique_id=651166233]
+offset_left = 346.0
+offset_top = -135.0
+offset_right = 426.0
+offset_bottom = -112.0
+text = "Sort"
 
 [node name="Back" type="TileMapLayer" parent="." unique_id=555651767]
 z_index = -1

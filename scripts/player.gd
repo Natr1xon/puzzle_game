@@ -54,13 +54,9 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 
 func interact_with_tower():
-	# Находим LevelLogic и вызываем взаимодействие с текущим колышком
-	var level_logic = get_tree().root.find_child("LevelLogic", true, false)
+	var level_logic = get_node("../LevelLogic")
 	if level_logic and level_logic.has_method("interact_with_current_peg"):
 		level_logic.interact_with_current_peg()
-	else:
-		# Старая логика для других объектов
-		interact()
 
 func pass_through_one_way_platform():
 	var layer_bit = 1 << (ONE_WAY_LAYER - 1)  

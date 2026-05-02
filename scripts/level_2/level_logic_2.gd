@@ -9,12 +9,10 @@ var drawn_connections = {}
 signal node_reached(node)
 signal travel_failed(reason)
 
-@onready var feedback_label = $"../Player/FeedbackLabel"
 @onready var connection_container = $"../Connections"
 @onready var main = get_tree().root.get_node("Main")
 
 func _ready():
-	feedback_label.text = ' '
 	randomize()
 	await get_tree().process_frame
 	find_all_nodes()
@@ -26,15 +24,6 @@ func _ready():
 func find_all_nodes():
 	all_nodes = get_tree().get_nodes_in_group("travel_nodes")
 	print("Найдено узлов: ", all_nodes.size())
-
-func show_feedback(text: String, duration: float = 1.0):
-	feedback_label.text = text
-	feedback_label.modulate.a = 1.0
-	
-	await get_tree().create_timer(duration).timeout
-	
-	var tween = create_tween()
-	tween.tween_property(feedback_label, "modulate:a", 0.0, 0.5)
 
 func draw_connection(a, b):
 	var key = str(a.get_instance_id()) + "_" + str(b.get_instance_id())
@@ -77,7 +66,7 @@ func _on_player_reached_node(node):
 	current_node = node
 	
 	if old_node and not can_travel(old_node, node):
-		show_feedback("❌ Переход невозможен!")
+		Notify.warn("Переход невозможен!", 3.0)
 		current_node = old_node
 		travel_failed.emit("Путь закрыт")
 		return
@@ -184,7 +173,10 @@ func compare_with_optimal(start_node, end_node):
 		{"player_cost": player_cost, "optimal_cost": optimal_cost}
 	)
 	
-	show_feedback(actual_string)
+	Notify.success(actual_string)
 	
 func check_win():
-	compare_with_optimal(player_path[0], player_path[-1])
+	if player_path.size() == 5:
+		compare_with_optimal(player_path[0], player_path[-1])
+	else:
+		Notify.error("Весь путь не пройден", 2.0)

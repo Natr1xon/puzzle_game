@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://cr2rkfope6bmn"]
 
-[ext_resource type="Script" uid="uid://c80va6ldtalyp" path="res://scripts/peg.gd" id="1_ptumh"]
+[ext_resource type="Script" uid="uid://c80va6ldtalyp" path="res://scripts/objects/peg.gd" id="1_ptumh"]
 [ext_resource type="Texture2D" uid="uid://8tnd84iqcm6f" path="res://assets/sprites/city/Assets_City.png" id="2_866lr"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ps4tf"]
@@ -8,18 +8,18 @@ atlas = ExtResource("2_866lr")
 region = Rect2(212, 0, 8, 48)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ptumh"]
-size = Vector2(8, 144)
+size = Vector2(8, 128)
 
 [node name="Peg" type="Node2D" unique_id=870553154]
 script = ExtResource("1_ptumh")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1867073721]
-position = Vector2(2.861023e-06, 31.999998)
-scale = Vector2(1.0000002, 2.8333333)
+position = Vector2(2.861023e-06, 26.000004)
+scale = Vector2(1.0000002, 2.5833335)
 texture = SubResource("AtlasTexture_ps4tf")
 
 [node name="Area2D" type="Area2D" parent="." unique_id=827994956]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1707657332]
-position = Vector2(0, 32)
+position = Vector2(0, 24)
 shape = SubResource("RectangleShape2D_ptumh")

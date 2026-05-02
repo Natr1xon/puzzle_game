@@ -412,7 +412,7 @@ sources/0 = SubResource("TileSetAtlasSource_ps4tf")
 [node name="Level" type="Node2D" unique_id=847719169]
 script = ExtResource("1_jgt0v")
 
-[node name="Player" parent="." unique_id=1634076529 instance=ExtResource("3_4wrbh")]
+[node name="Player" parent="." unique_id=1634076529 groups=["player"] instance=ExtResource("3_4wrbh")]
 position = Vector2(0, -18)
 
 [node name="LevelLogic" type="Node2D" parent="." unique_id=669914656]
@@ -445,9 +445,8 @@ tile_map_data = PackedByteArray("AADz/wAAAAAAAAAAAAD0/wAAAAABAAAAAAD1/wAAAAABAAA
 tile_set = SubResource("TileSet_lcxk4")
 
 [node name="Background" type="Sprite2D" parent="." unique_id=73011916]
-visible = false
 z_index = -2
-position = Vector2(-8, -368)
+position = Vector2(8, -240)
 texture = ExtResource("4_ps4tf")
 
 [node name="KillZone" parent="." unique_id=1033909961 instance=ExtResource("7_1jnh5")]

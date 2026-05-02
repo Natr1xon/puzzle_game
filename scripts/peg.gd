@@ -5,20 +5,17 @@ class_name Peg
 
 func _ready():
 	print("Peg ", index, " (", name, ") создан в позиции: ", global_position)
-	
-	# Добавляем Area2D для обнаружения игроком (без кликов мышкой)
 	var detection_area = Area2D.new()
 	detection_area.name = "DetectionArea"
 	
 	var collision = CollisionShape2D.new()
 	var shape = RectangleShape2D.new()
-	shape.extents = Vector2(80, 80)  # Увеличенная зона обнаружения
+	shape.extents = Vector2(80, 80)  
 	collision.shape = shape
 	
 	detection_area.add_child(collision)
 	add_child(detection_area)
-	
-	# Подключаем сигналы для обнаружения игрока
+
 	detection_area.body_entered.connect(_on_body_entered)
 	detection_area.body_exited.connect(_on_body_exited)
 

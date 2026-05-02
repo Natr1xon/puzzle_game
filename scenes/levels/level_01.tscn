@@ -9,7 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://8tnd84iqcm6f" path="res://assets/sprites/city/Assets_City.png" id="6_1ey3t"]
 [ext_resource type="Texture2D" uid="uid://7uq5jajupo7n" path="res://assets/sprites/button/button.png" id="6_50wog"]
 [ext_resource type="PackedScene" uid="uid://cf043gxy2xtfm" path="res://scenes/kill_zone.tscn" id="7_kfebt"]
-[ext_resource type="Texture2D" uid="uid://c6bk8sn0k4mgl" path="res://assets/background/bluecity.jpg" id="10_r72dd"]
+[ext_resource type="Texture2D" uid="uid://cqvlxh1x71a5r" path="res://assets/background/bluecity.jpg" id="10_r72dd"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_50wog"]
 size = Vector2(43, 20)

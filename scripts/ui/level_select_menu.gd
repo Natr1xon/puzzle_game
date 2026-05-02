@@ -25,7 +25,7 @@ var levels = [
 		"title": "Уровень 3. Ханойская башня",
 		"description": "Обучающий уровень про популярную головоломку",
 		"path": "res://scenes/levels/level_03.tscn",
-		"texture": preload("res://assets/background/sunsetcity.png")
+		"texture": preload("res://assets/background/nightcity.png")
 	}
 ]
 

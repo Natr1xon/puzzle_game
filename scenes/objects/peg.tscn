@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://cr2rkfope6bmn"]
+
+[ext_resource type="Script" uid="uid://c80va6ldtalyp" path="res://scripts/peg.gd" id="1_ptumh"]
+[ext_resource type="Texture2D" uid="uid://8tnd84iqcm6f" path="res://assets/sprites/city/Assets_City.png" id="2_866lr"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ps4tf"]
+atlas = ExtResource("2_866lr")
+region = Rect2(212, 0, 8, 48)
+
+[node name="Peg" type="Node2D" unique_id=870553154]
+script = ExtResource("1_ptumh")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1867073721]
+position = Vector2(2.861023e-06, 31.999998)
+scale = Vector2(1.0000002, 2.8333333)
+texture = SubResource("AtlasTexture_ps4tf")

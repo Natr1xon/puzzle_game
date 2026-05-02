@@ -58,8 +58,9 @@ func update_view():
 			var disk = pegs[peg_index][i]
 
 			var center_x = peg.global_position.x
-			var y = 300 - i * 25
+			var y = -25 - i * 25
 
+			print(y)
 			# 🔥 ВАЖНО: ширина диска
 			var width = disk.disk_size * 20
 

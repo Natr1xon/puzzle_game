@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://bipcqk008sh41"]
+
+[ext_resource type="Script" uid="uid://bmiu0atnmam6x" path="res://scripts/ui/tutorial_popup.gd" id="1_g8hy4"]
+
+[node name="TutorialPopup" type="CanvasLayer" unique_id=581748632]
+script = ExtResource("1_g8hy4")

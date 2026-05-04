@@ -5,12 +5,11 @@ extends Node
 @onready var level_container = $LevelContainer
 @onready var ui = $UI
 @onready var hud = $UI/HUD
+@onready var tutorial = $UI/HUD/TutorialButton
 @onready var game_menu = $UI/game_menu
 @onready var resume_button = $UI/game_menu/Panel/VBoxContainer/ResumeButton
 
-
 var current_level_path = ""
-
 var coins := 0
 
 func add_coin():
@@ -25,15 +24,16 @@ func _ready():
 	ui.hide()
 	
 	var shortcut = Shortcut.new()
-	
-	var events = InputMap.action_get_events("game_menu")
-	if events.size() > 0:
-		shortcut.events = events
+	var menu_events = InputMap.action_get_events("open_game_menu")
+	if menu_events.size() > 0:
+		shortcut.events = menu_events
 		resume_button.shortcut = shortcut
-
+	
 	menu.start_game.connect(_on_start_game)
 
 	hud.open_menu.connect(_on_open_game_menu)
+	hud.open_tutorial.connect(_on_open_tutorial)  
+	
 	game_menu.resume_pressed.connect(_on_resume)
 	game_menu.level_select_pressed.connect(_on_level_select_from_game)
 	game_menu.main_menu_pressed.connect(_on_main_menu_from_game)
@@ -49,11 +49,10 @@ func _on_start_game():
 
 func _on_level_selected(path):
 	level_select.hide()
-
 	load_level(path)
-
 	ui.show()
 	hud.show()
+	
 	if "level_02" in current_level_path:
 		hud.show_sum()
 	else:
@@ -69,7 +68,21 @@ func _on_back_from_select():
 func _on_open_game_menu():
 	game_menu.show()
 	get_tree().paused = true
-	
+
+func _on_open_tutorial():
+	var current_level_logic = get_current_level_logic()
+	if current_level_logic and current_level_logic.has_method("show_tutorial_again"):
+		current_level_logic.show_tutorial_again()
+	else:
+		print("Туториал не доступен для текущего уровня")
+
+func get_current_level_logic():
+	for child in level_container.get_children():
+		var level_logic = child.find_child("LevelLogic", true, false)
+		if level_logic and level_logic.has_method("show_tutorial_again"):
+			return level_logic
+	return null
+
 func _on_resume():
 	game_menu.hide()
 	get_tree().paused = false
@@ -77,25 +90,21 @@ func _on_resume():
 func _on_level_select_from_game():
 	get_tree().paused = false
 
-	# удалить уровень
 	for child in level_container.get_children():
 		child.queue_free()
 	
 	game_menu.hide()
 	hud.hide()
-	
 	level_select.show()
 	
 func _on_main_menu_from_game():
 	get_tree().paused = false
 
-	# удалить уровень
 	for child in level_container.get_children():
 		child.queue_free()
 
 	game_menu.hide()
 	hud.hide()
-
 	menu.show()
 	
 func update_hud_sum(value: int):

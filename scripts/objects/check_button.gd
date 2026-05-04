@@ -23,11 +23,9 @@ func _on_body_exited(body):
 		if sprite:
 			sprite.modulate = Color.WHITE
 
-# Этот метод вызывается из player.gd
 func interact():
 	if not is_player_near:
 		return
-
 
 	var tween = create_tween()
 	tween.set_ease(Tween.EASE_OUT)
@@ -41,12 +39,8 @@ func interact():
 	tween.tween_property(self, "scale", Vector2(1, 1), 0.1)
 	await tween.finished
 	
-	var level_logic = get_node("/root/Main/LevelContainer/Level/LevelLogic")
-	if not level_logic:
-		level_logic = get_node("../LevelLogic")
-	if not level_logic:
-		level_logic = get_tree().root.find_child("LevelLogic", true, false)
-	
+	var level_logic = get_node("../LevelLogic")
+
 	if level_logic and level_logic.has_method("check_win"):
 		print("LevelLogic найден, вызываем check_win()")
 		level_logic.check_win()

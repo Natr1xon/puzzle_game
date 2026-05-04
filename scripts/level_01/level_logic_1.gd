@@ -13,6 +13,29 @@ func _ready():
 	for child in $"../PuzzleContainer".get_children():
 		if child.has_method("set_value"):
 			child.set_value(rng.randi_range(0, 9))
+	
+	show_control_hint()
+
+func show_control_hint():
+	var hint = CanvasLayer.new()
+	hint.layer = 50
+	
+	var panel = Panel.new()
+	panel.size = Vector2(200, 50)
+	panel.position = Vector2(10, get_viewport().size.y - 60)
+	
+	var style = StyleBoxFlat.new()
+	style.bg_color = Color(0, 0, 0, 0.7)
+	panel.add_theme_stylebox_override("panel", style)
+	
+	var label = Label.new()
+	label.text = "[E] - Взаимодействие"
+	label.position = Vector2(10, 10)
+	label.add_theme_color_override("font_color", Color.WHITE)
+	
+	panel.add_child(label)
+	hint.add_child(panel)
+	add_child(hint)
 
 func get_objects():
 	var result = []

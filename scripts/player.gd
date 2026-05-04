@@ -60,7 +60,7 @@ func interact_with_tower():
 		level_logic.interact_with_current_peg()
 		
 func interact_with_puzzle():
-	if input_handler and input_handler.has_method("handle_interact"):
+	if input_handler and input_handler.has_method("handle_interact"):		
 		var nearest = find_nearest_puzzle_object()
 		if nearest:
 			input_handler.handle_interact(nearest)

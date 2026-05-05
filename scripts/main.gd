@@ -10,6 +10,7 @@ extends Node
 @onready var resume_button = $UI/game_menu/Panel/VBoxContainer/ResumeButton
 
 var current_level_path = ""
+var current_level_instance = null
 var coins := 0
 
 func add_coin():
@@ -35,6 +36,7 @@ func _ready():
 	hud.open_tutorial.connect(_on_open_tutorial)  
 	
 	game_menu.resume_pressed.connect(_on_resume)
+	game_menu.restart_pressed.connect(_on_restart_level)
 	game_menu.level_select_pressed.connect(_on_level_select_from_game)
 	game_menu.main_menu_pressed.connect(_on_main_menu_from_game)
 
@@ -67,7 +69,7 @@ func _on_back_from_select():
 	
 func _on_open_game_menu():
 	game_menu.show()
-	get_tree().paused = true
+	get_tree().paused = true 
 
 func _on_open_tutorial():
 	var current_level_logic = get_current_level_logic()
@@ -106,6 +108,12 @@ func _on_main_menu_from_game():
 	game_menu.hide()
 	hud.hide()
 	menu.show()
+
+func _on_restart_level():
+	game_menu.hide()
+	
+	if current_level_path != "":
+		load_level(current_level_path)
 	
 func update_hud_sum(value: int):
 	hud.update_sum(value)
@@ -120,17 +128,25 @@ func load_level(path):
 		child.queue_free()
 
 	var scene = load(path)
-	var level = scene.instantiate()
-	$LevelContainer.add_child(level)
+	current_level_instance = scene.instantiate()
+	$LevelContainer.add_child(current_level_instance)
+
+	var player = current_level_instance.find_child("Player", true, false)
+	if player:
+		player.add_to_group("player")
 	
 	for coin in get_tree().get_nodes_in_group("coins"):
 		if not coin.collected.is_connected(add_coin):
 			coin.collected.connect(add_coin)
 
-	var killzone = level.get_node_or_null("KillZone")
+	var killzone = current_level_instance.get_node_or_null("KillZone")
 	if killzone:
 		killzone.player_killed.connect(_on_player_died)
 
 func _on_player_died():
-	if current_level_path != "":
-		load_level(current_level_path)
+	var player = get_tree().get_first_node_in_group("player")
+	if player and player.has_method("respawn"):
+		player.respawn()
+	else:
+		if current_level_path != "":
+			load_level(current_level_path)

@@ -5,6 +5,7 @@ const JUMP_VELOCITY = -300.0
 
 var selected_object = null
 var is_passing_through = false
+var spawn_position = Vector2.ZERO
 
 const ONE_WAY_LAYER = 2
 
@@ -16,6 +17,9 @@ func _ready():
 	floor_max_angle = deg_to_rad(75)
 	floor_stop_on_slope = false
 	floor_snap_length = 5.0
+	
+	spawn_position = global_position
+	add_to_group("player")
 
 func _physics_process(delta: float) -> void:
 	if not is_on_floor():
@@ -53,6 +57,17 @@ func _physics_process(delta: float) -> void:
 		interact_with_tower()
 
 	move_and_slide()
+
+func respawn():
+	global_position = spawn_position
+
+	velocity = Vector2.ZERO
+
+	is_passing_through = false
+
+	modulate = Color(1, 1, 1, 0)
+	var tween = create_tween()
+	tween.tween_property(self, "modulate", Color(1, 1, 1, 1), 0.3)
 
 func interact_with_tower():
 	var level_logic = get_node("../LevelLogic")

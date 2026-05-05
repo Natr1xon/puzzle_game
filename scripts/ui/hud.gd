@@ -14,12 +14,14 @@ func _ready():
 	var shortcut = Shortcut.new()
 	var menu_events = InputMap.action_get_events("open_game_menu")
 	if menu_events.size() > 0:
+		print("Щёлк")
 		shortcut.events = menu_events
 		menu_button.shortcut = shortcut
 	
 	shortcut = Shortcut.new()
 	var tutorial_events = InputMap.action_get_events("open_tutorial")
 	if tutorial_events.size() > 0:
+		print("Щёлк")
 		shortcut.events = tutorial_events
 		tutorial_button.shortcut = shortcut
 	

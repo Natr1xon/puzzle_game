@@ -11,19 +11,19 @@ var LevelCardScene = preload("res://scenes/main/level_card.tscn")
 var levels = [
 	{
 		"title": "Уровень 1. Сортировка",
-		"description": "Обучающий уровень по изучении простейших сортировок",
+		"description": "Изучите основы алгоритмов сортировки данных.",
 		"path": "res://scenes/levels/level_01.tscn",
 		"texture": preload("res://assets/background/bluecity.jpg")
 	},
 	{
 		"title": "Уровень 2. Графы",
-		"description": "Обучающий уровень по поиску кратчайшего пути в графе",
+		"description": "Познакомьтесь с основами теории графов и поиском оптимального маршрута.",
 		"path": "res://scenes/levels/level_02.tscn",
 		"texture": preload("res://assets/background/sunsetcity.png")
 	},
 	{
 		"title": "Уровень 3. Ханойская башня",
-		"description": "Обучающий уровень про популярную головоломку",
+		"description": "Решите классическую математическую головоломку, основанную на рекурсивных алгоритмах.",
 		"path": "res://scenes/levels/level_03.tscn",
 		"texture": preload("res://assets/background/nightcity.png")
 	}

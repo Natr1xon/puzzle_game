@@ -32,15 +32,11 @@ func show_summary(level: String, data: Dictionary):
 		"tower":
 			show_tower_summary(data)
 
-	# 👇 СНАЧАЛА ПОЗИЦИОНИРУЕМ И РАЗМЕЩАЕМ (ПОКА ОКНО СКРЫТО)
 	await resize_panel_to_content()
 	
-	# 👇 УСТАНАВЛИВАЕМ НАЧАЛЬНУЮ ПОЗИЦИЮ (без анимации)
 	scale = Vector2(0.8, 0.8)
 	show()
 	
-	# 👇 УБИРАЕМ ДЕРГАНЬЕ - не меняем позицию во время анимации
-	# Запоминаем целевую позицию и применяем анимацию только к scale
 	var final_scale = Vector2(1, 1)
 	
 	var tween = create_tween()

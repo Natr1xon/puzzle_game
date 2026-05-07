@@ -45,6 +45,7 @@ offset_bottom = -20.0
 
 [node name="TitleLabel" type="Label" parent="Panel/VBoxContainer" unique_id=1041272513]
 layout_mode = 2
+text = "Заголовок"
 horizontal_alignment = 1
 
 [node name="HSeparator" type="HSeparator" parent="Panel/VBoxContainer" unique_id=1179882633]
@@ -52,9 +53,11 @@ layout_mode = 2
 
 [node name="InfoLabel" type="Label" parent="Panel/VBoxContainer" unique_id=907669763]
 layout_mode = 2
+text = "Время выполнения"
 
 [node name="StatusLabel" type="Label" parent="Panel/VBoxContainer" unique_id=1703496039]
 layout_mode = 2
+text = "Уровень пройден"
 
 [node name="HSeparator2" type="HSeparator" parent="Panel/VBoxContainer" unique_id=613899328]
 layout_mode = 2
@@ -65,9 +68,12 @@ alignment = 1
 
 [node name="MainMenuButton" type="Button" parent="Panel/VBoxContainer/ButtonsContainer" unique_id=380724271]
 layout_mode = 2
+text = "ГЛАВНОЕ МЕНЮ"
 
 [node name="RestartButton" type="Button" parent="Panel/VBoxContainer/ButtonsContainer" unique_id=1350307277]
 layout_mode = 2
+text = "ЗАНОВО"
 
 [node name="NextLevelButton" type="Button" parent="Panel/VBoxContainer/ButtonsContainer" unique_id=1320213127]
 layout_mode = 2
+text = "СЛЕДУЮЩИЙ УРОВЕНЬ →"

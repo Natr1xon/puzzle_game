@@ -73,7 +73,13 @@ func show_tutorial_again(first_time = false):
 func start_game():
 	moves_count = 0 
 	start_time = Time.get_ticks_msec() 
-	input_handler = get_node("../InputHandler")
+
+	input_handler = get_node_or_null("../InputHandler")
+	if not input_handler:
+		input_handler = get_tree().get_first_node_in_group("input_handler")
+		if not input_handler:
+			print("ОШИБКА: InputHandler не найден!")
+			return
 	
 	var pegs_list = $"../Pegs".get_children()
 	for i in range(pegs_list.size()):
@@ -84,6 +90,7 @@ func start_game():
 	Notify.info("Переместите все диски на правый стержень!", 3.0)
 
 func on_player_entered_peg_zone(peg_index: int):
+	print(peg_index)
 	current_near_peg = peg_index
 
 func on_player_exited_peg_zone(peg_index: int):
@@ -94,16 +101,19 @@ func interact_with_current_peg():
 	if current_near_peg == -1:
 		Notify.warn("Подойдите к колышку!")
 		return false
-	
-	if input_handler:
+
+	if input_handler and input_handler.has_method("handle_peg_clicked"):
 		input_handler.handle_peg_clicked(current_near_peg)
-	return true
+		return true
+	else:
+		print("ОШИБКА: input_handler не готов!")
+		return false
 
 func highlight_peg(peg_index: int, highlight: bool):
 	var peg = $"../Pegs".get_child(peg_index)
 	var sprite = peg.get_node_or_null("Sprite2D")
 	if sprite:
-		sprite.modulate = Color.YELLOW if highlight else Color.WHITE
+		sprite.modulate = Color.RED if highlight else Color.WHITE
 
 func init_game():
 	for child in $"../Disks".get_children():

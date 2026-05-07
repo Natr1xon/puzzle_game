@@ -29,7 +29,7 @@ func handle_peg_clicked(peg_index: int):
 		if selected_peg != peg_index:
 			await move_disk(selected_peg, peg_index)
 		else:
-			Notify.warn("Нельзя переместить диск на тот же колышек!")
+			Notify.info("Отмена выбора")
 		
 		level_logic.highlight_peg(selected_peg, false)
 		selected_peg = -1

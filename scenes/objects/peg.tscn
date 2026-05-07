@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://cr2rkfope6bmn"]
 
-[ext_resource type="Script" uid="uid://c80va6ldtalyp" path="res://scripts/objects/peg.gd" id="1_ptumh"]
+[ext_resource type="Script" uid="uid://c80va6ldtalyp" path="res://scripts/level_3/peg.gd" id="1_ptumh"]
 [ext_resource type="Texture2D" uid="uid://8tnd84iqcm6f" path="res://assets/sprites/city/Assets_City.png" id="2_866lr"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ps4tf"]

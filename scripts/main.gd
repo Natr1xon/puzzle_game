@@ -173,5 +173,21 @@ func _on_completion_menu():
 func _on_completion_next_level():
 	print("Следующий уровень из окна итогов")
 	get_tree().paused = false
-	_on_main_menu_from_game()
+	
+	var next_path = ""
+	
+	if "level_01" in current_level_path:
+		next_path = "res://scenes/levels/level_02.tscn"
+	elif "level_02" in current_level_path:
+		next_path = "res://scenes/levels/level_03.tscn"
+	else:
+		_on_main_menu_from_game()
+		close_completion_window()
+		return
+	
+	if next_path != "" and ResourceLoader.exists(next_path):
+		load_level(next_path)
+	else:
+		_on_main_menu_from_game()
+	
 	close_completion_window()

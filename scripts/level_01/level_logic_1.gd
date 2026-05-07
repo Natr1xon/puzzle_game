@@ -2,10 +2,14 @@ extends Node
 
 var is_completed = false
 var tutorial_popup = null
+var attempts = 0
+var swap_count = 0
+var start_time = 0 
 
 @onready var feedback_label = $"../FeedbackLabel"
 
 func _ready():
+	add_to_group("level_logic")
 	await get_tree().process_frame
 	show_tutorial()
 
@@ -57,18 +61,14 @@ func show_tutorial_again(first_time = false):
 	tutorial_popup = null
 	get_tree().paused = false
 	
-	if not is_completed and not feedback_label.text == "Sort":
+	if not is_completed:
 		start_game()
 
 func start_game():
+	swap_count = 0
+	start_time = Time.get_ticks_msec()
 	feedback_label.text = "Sort"
-	var rng = RandomNumberGenerator.new()
-	rng.randomize()
-	
-	for child in $"../PuzzleContainer".get_children():
-		if child.has_method("set_value"):
-			child.set_value(rng.randi_range(0, 9))
-	
+
 	Notify.info("Расставьте числа в правильном порядке!", 3.0)
 
 func get_objects():
@@ -78,12 +78,16 @@ func get_objects():
 			result.append(child)
 	return result
 
+func increment_swap():
+	swap_count += 1
+	print("Перестановок сделано: ", swap_count)
+
 func check_answer(is_correct: bool):
 	if is_correct:
 		feedback_label.text = "Correct!"
 		feedback_label.modulate = Color.GREEN
-		Notify.success("Правильно! Уровень пройден!", 2.0)
 	else:
+		attempts += 1
 		feedback_label.text = "Incorrect!"
 		feedback_label.modulate = Color.RED
 		Notify.error("Неправильный порядок! Попробуйте еще раз", 2.0)
@@ -111,3 +115,45 @@ func check_win():
 
 	is_completed = true
 	check_answer(true)
+
+	show_completion_window()
+
+func show_completion_window():
+	var main = get_node("/root/Main")
+	if main and main.has_method("show_completion_window"):
+		var time_spent = (Time.get_ticks_msec() - start_time) / 1000.0
+		var minutes = floor(time_spent / 60)
+		var seconds = int(time_spent) % 60 
+		var time_string = str(minutes) + "м " + str(seconds) + "с"
+		
+		main.show_completion_window("sorting", {
+			"attempts": attempts,
+			"swap_count": swap_count,
+			"min_swaps": calculate_min_swaps(),
+			"time_spent": time_string,
+			"completed": true,
+			"next_level": "res://scenes/levels/level_02.tscn"
+		})
+
+
+func calculate_min_swaps() -> int:
+	var objects = get_objects()
+	if objects.is_empty():
+		return 0
+	
+	var values = []
+	for obj in objects:
+		values.append(obj.get_value())
+
+	var sorted_values = values.duplicate()
+	var swaps = 0
+	
+	for i in range(sorted_values.size()):
+		for j in range(0, sorted_values.size() - i - 1):
+			if sorted_values[j] > sorted_values[j + 1]:
+				var temp = sorted_values[j]
+				sorted_values[j] = sorted_values[j + 1]
+				sorted_values[j + 1] = temp
+				swaps += 1
+	
+	return swaps

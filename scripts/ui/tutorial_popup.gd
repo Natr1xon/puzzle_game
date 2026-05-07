@@ -69,10 +69,8 @@ func show_page():
 	text.add_theme_font_size_override("normal_font_size", 16)
 	panel.add_child(text)
 
-	# Нижняя панель с кнопками
 	var button_y = 430
 	
-	# Кнопка "НАЗАД" (только не на первой странице)
 	if current_page > 0:
 		var back_button = Button.new()
 		back_button.text = "← НАЗАД"
@@ -81,7 +79,6 @@ func show_page():
 		back_button.pressed.connect(_on_back_pressed)
 		panel.add_child(back_button)
 	
-	# Кнопка "ПРОПУСТИТЬ" (только на первой странице)
 	if current_page == 0 and pages.size() > 1:
 		var skip_button = Button.new()
 		skip_button.text = "ПРОПУСТИТЬ"
@@ -90,7 +87,6 @@ func show_page():
 		skip_button.pressed.connect(_on_skip_pressed)
 		panel.add_child(skip_button)
 	
-	# Индикатор страницы (центр)
 	var page_indicator = Label.new()
 	page_indicator.text = str(current_page + 1) + " / " + str(pages.size())
 	page_indicator.position = Vector2(260, button_y + 8)
@@ -100,7 +96,6 @@ func show_page():
 	page_indicator.add_theme_font_size_override("font_size", 16)
 	panel.add_child(page_indicator)
 	
-	# Кнопка "ДАЛЕЕ" или "НАЧАТЬ/ПРОДОЛЖИТЬ"
 	var next_button = Button.new()
 	if current_page == pages.size() - 1:
 		if is_first_time:

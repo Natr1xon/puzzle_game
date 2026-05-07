@@ -6,6 +6,9 @@ var total_value: int = 0
 var player_path: Array = []
 var drawn_connections = {}
 var tutorial_popup = null
+var start_time = 0 
+var optimal_path_sum = 0
+var is_completed = false
 
 signal node_reached(node)
 signal travel_failed(reason)
@@ -14,7 +17,7 @@ signal travel_failed(reason)
 @onready var main = get_tree().root.get_node("Main")
 
 func _ready():
-	randomize()
+	add_to_group("level_logic")
 	await get_tree().process_frame
 	show_tutorial()
 
@@ -63,12 +66,19 @@ func show_tutorial_again(first_time = false):
 	tutorial_popup = null
 	get_tree().paused = false
 	
-	if all_nodes.is_empty():
+	if not is_completed and all_nodes.is_empty():
 		start_game()
 
 func start_game():
+	start_time = Time.get_ticks_msec()
 	find_all_nodes()
 	reset_total()
+	
+	if all_nodes.size() >= 5:
+		var start_node = all_nodes[0]
+		var end_node = all_nodes[4] 
+		var optimal_path = find_shortest_path(start_node, end_node)
+		optimal_path_sum = calculate_path_cost(optimal_path)
 	
 	for node in all_nodes:
 		if node.has_signal("player_entered"):
@@ -215,22 +225,27 @@ func calculate_path_cost(path: Array) -> int:
 		sum += node.node_value
 	return sum
 
-func compare_with_optimal(start_node, end_node):
-	var optimal_path = find_shortest_path(start_node, end_node)
-	
-	var player_cost = calculate_path_cost(player_path)
-	var optimal_cost = calculate_path_cost(optimal_path)
-	
-	var format_string = "🧍 Ваш путь: {player_cost} \n 🤖 Кратчайший путь: {optimal_cost}"
-	var actual_string = format_string.format(
-		{"player_cost": player_cost, "optimal_cost": optimal_cost}
-	)
-	
-	Notify.success(actual_string)
-
 func check_win():
 	if player_path.size() == 5:
-		compare_with_optimal(player_path[0], player_path[-1])
+		is_completed = true
+		show_completion_window()
 	else:
 		var remaining = 5 - player_path.size()
 		Notify.info("Осталось посетить узлов: " + str(remaining), 2.0)
+
+func show_completion_window():
+	if main and main.has_method("show_completion_window"):
+		var time_spent = (Time.get_ticks_msec() - start_time) / 1000.0
+		var minutes = floor(time_spent / 60)
+		var seconds = int(time_spent) % 60 
+		var time_string = str(minutes) + "м " + str(seconds) + "с"
+		
+		main.show_completion_window("graph", {
+			"time_spent": time_string,
+			"visited_nodes": player_path.size(),
+			"total_visited": 5,
+			"total_sum": total_value,
+			"optimal_sum": optimal_path_sum,
+			"completed": true,
+			"next_level": "res://scenes/levels/level_03.tscn"
+		})

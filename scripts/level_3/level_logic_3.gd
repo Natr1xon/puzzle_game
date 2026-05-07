@@ -4,11 +4,15 @@ var pegs = [[], [], []]
 var selected_peg = -1
 var current_near_peg = -1
 var tutorial_popup = null
+var moves_count = 0  
+var start_time = 0   
+var is_completed = false  
 
 var DiskScene = preload("res://scenes/objects/disk.tscn")
 var input_handler = null
 
 func _ready():
+	add_to_group("level_logic")
 	await get_tree().process_frame
 	show_tutorial()
 
@@ -67,6 +71,8 @@ func show_tutorial_again(first_time = false):
 		start_game()
 
 func start_game():
+	moves_count = 0 
+	start_time = Time.get_ticks_msec() 
 	input_handler = get_node("../InputHandler")
 	
 	var pegs_list = $"../Pegs".get_children()
@@ -131,3 +137,29 @@ func update_view():
 			var x = center_x - disk.size.x / 2
 			
 			disk.position = Vector2(x, y)
+
+func increment_moves():
+	moves_count += 1
+	print("Ходов сделано: ", moves_count)
+	check_win()
+
+func check_win():
+	if not is_completed and pegs[2].size() == 5:
+		is_completed = true
+		show_completion_window()
+
+func show_completion_window():
+	var main = get_node("/root/Main")
+	if main and main.has_method("show_completion_window"):
+		var time_spent = (Time.get_ticks_msec() - start_time) / 1000.0
+		var minutes = floor(time_spent / 60)
+		var seconds = int(time_spent) % 60 
+		var time_string = str(minutes) + "м " + str(seconds) + "с"
+		
+		main.show_completion_window("tower", {
+			"moves": moves_count,
+			"optimal_moves": 31,  
+			"time_spent": time_string,
+			"completed": true,
+			"next_level": "" 
+		})

@@ -11,11 +11,6 @@ extends Node
 
 var current_level_path = ""
 var current_level_instance = null
-var coins := 0
-
-func add_coin():
-	coins += 1
-	hud.update_coins(coins)
 
 func _ready():
 	print_tree_pretty()
@@ -120,9 +115,6 @@ func update_hud_sum(value: int):
 
 func load_level(path):
 	current_level_path = path
-	
-	coins = 0
-	hud.update_coins(coins)
 
 	for child in level_container.get_children():
 		child.queue_free()
@@ -134,11 +126,7 @@ func load_level(path):
 	var player = current_level_instance.find_child("Player", true, false)
 	if player:
 		player.add_to_group("player")
-	
-	for coin in get_tree().get_nodes_in_group("coins"):
-		if not coin.collected.is_connected(add_coin):
-			coin.collected.connect(add_coin)
-
+		
 	var killzone = current_level_instance.get_node_or_null("KillZone")
 	if killzone:
 		killzone.player_killed.connect(_on_player_died)
@@ -150,3 +138,40 @@ func _on_player_died():
 	else:
 		if current_level_path != "":
 			load_level(current_level_path)
+
+func close_completion_window():
+	var completion_window = get_node_or_null("CompletionWindow")
+	if completion_window:
+		completion_window.queue_free()
+
+func show_completion_window(level_type: String, data: Dictionary):
+	var completion_window = get_node_or_null("UI/CompletionWindow")
+	
+	if completion_window:
+		completion_window.show()
+		if not completion_window.restart_level_requested.is_connected(_on_completion_restart):
+			completion_window.restart_level_requested.connect(_on_completion_restart)
+		if not completion_window.menu_requested.is_connected(_on_completion_menu):
+			completion_window.menu_requested.connect(_on_completion_menu)
+		if not completion_window.next_level_requested.is_connected(_on_completion_next_level):
+			completion_window.next_level_requested.connect(_on_completion_next_level)
+
+		completion_window.show_summary(level_type, data)
+
+func _on_completion_restart():
+	print("Рестарт уровня из окна итогов")
+	get_tree().paused = false
+	_on_restart_level()
+	close_completion_window()
+
+func _on_completion_menu():
+	print("Выход в меню из окна итогов")
+	get_tree().paused = false
+	_on_main_menu_from_game()
+	close_completion_window()
+
+func _on_completion_next_level():
+	print("Следующий уровень из окна итогов")
+	get_tree().paused = false
+	_on_main_menu_from_game()
+	close_completion_window()

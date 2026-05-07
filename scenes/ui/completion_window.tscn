@@ -1,0 +1,73 @@
+[gd_scene format=3 uid="uid://ds0l753pdl3uc"]
+
+[ext_resource type="Script" uid="uid://b40wggi05wcu0" path="res://scripts/ui/completion_window.gd" id="1_gppg0"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gppg0"]
+bg_color = Color(0.14509805, 0.16470589, 0.22352941, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.71556574, 0.6991369, 0.6824164, 1)
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
+
+[node name="CompletionWindow" type="Control" unique_id=331959973]
+layout_mode = 3
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource("1_gppg0")
+
+[node name="Panel" type="Panel" parent="." unique_id=1143658789]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -300.0
+offset_top = -220.0
+offset_right = 300.0
+offset_bottom = 220.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_gppg0")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel" unique_id=427364183]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = 20.0
+offset_right = -20.0
+offset_bottom = -20.0
+
+[node name="TitleLabel" type="Label" parent="Panel/VBoxContainer" unique_id=1041272513]
+layout_mode = 2
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="Panel/VBoxContainer" unique_id=1179882633]
+layout_mode = 2
+
+[node name="InfoLabel" type="Label" parent="Panel/VBoxContainer" unique_id=907669763]
+layout_mode = 2
+
+[node name="StatusLabel" type="Label" parent="Panel/VBoxContainer" unique_id=1703496039]
+layout_mode = 2
+
+[node name="HSeparator2" type="HSeparator" parent="Panel/VBoxContainer" unique_id=613899328]
+layout_mode = 2
+
+[node name="ButtonsContainer" type="HBoxContainer" parent="Panel/VBoxContainer" unique_id=1032791898]
+layout_mode = 2
+alignment = 1
+
+[node name="MainMenuButton" type="Button" parent="Panel/VBoxContainer/ButtonsContainer" unique_id=380724271]
+layout_mode = 2
+
+[node name="RestartButton" type="Button" parent="Panel/VBoxContainer/ButtonsContainer" unique_id=1350307277]
+layout_mode = 2
+
+[node name="NextLevelButton" type="Button" parent="Panel/VBoxContainer/ButtonsContainer" unique_id=1320213127]
+layout_mode = 2

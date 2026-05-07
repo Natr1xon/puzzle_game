@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://ciuw4bvq8iwy2" path="res://scenes/main/level_select_menu.tscn" id="3_k2fmo"]
 [ext_resource type="PackedScene" uid="uid://bqnjpn64268ul" path="res://scenes/ui/hud.tscn" id="4_l3cfh"]
 [ext_resource type="PackedScene" uid="uid://b2nx2pwtgt5l6" path="res://scenes/ui/game_menu.tscn" id="5_6q06x"]
+[ext_resource type="PackedScene" uid="uid://ds0l753pdl3uc" path="res://scenes/ui/completion_window.tscn" id="6_ow5a4"]
 
 [node name="Main" type="Node2D" unique_id=550959682]
 script = ExtResource("1_hyk8p")
@@ -58,3 +59,9 @@ text = "Exit"
 process_mode = 3
 
 [node name="HUD" parent="UI" unique_id=34537194 instance=ExtResource("4_l3cfh")]
+
+[node name="CompletionWindow" parent="UI" unique_id=331959973 instance=ExtResource("6_ow5a4")]
+z_index = 2
+anchors_preset = 15
+grow_horizontal = 2
+grow_vertical = 2

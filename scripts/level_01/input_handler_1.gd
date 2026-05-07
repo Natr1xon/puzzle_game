@@ -8,6 +8,10 @@ func try_swap(a, b) -> bool:
 		tween.set_parallel(true)
 		tween.tween_property(a, "global_position", b.global_position, 0.2)
 		tween.tween_property(b, "global_position", a.global_position, 0.2)
+		
+		var level_logic = get_level_logic()
+		if level_logic and level_logic.has_method("increment_swap"):
+			level_logic.increment_swap()
 
 		await tween.finished
 		print("swap complete")
@@ -56,3 +60,16 @@ func handle_interact(obj):
 		selected_object.highlight(false) 
 
 	selected_object = null
+
+func get_level_logic():
+	var level_logics = get_tree().get_nodes_in_group("level_logic")
+	if level_logics.size() > 0:
+		return level_logics[0]
+
+	var parent = get_parent()
+	while parent:
+		if parent.has_method("increment_swap") or parent.has_method("check_win"):
+			return parent
+		parent = parent.get_parent()
+	
+	return null

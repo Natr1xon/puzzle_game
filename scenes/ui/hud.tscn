@@ -1,11 +1,6 @@
 [gd_scene format=3 uid="uid://bqnjpn64268ul"]
 
 [ext_resource type="Script" uid="uid://cflycggrswaa6" path="res://scripts/ui/hud.gd" id="1_0mwgc"]
-[ext_resource type="Texture2D" uid="uid://drh7xqg8aeob7" path="res://assets/sprites/coin/coin.png" id="2_hqnrr"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_bo48s"]
-atlas = ExtResource("2_hqnrr")
-region = Rect2(0, 0, 16.571838, 16)
 
 [node name="HUD" type="Control" unique_id=34537194]
 z_index = 4
@@ -24,26 +19,12 @@ offset_right = 96.0
 offset_bottom = 64.0
 text = "Menu"
 
-[node name="CoinScoreLabel" type="Label" parent="." unique_id=1646150871]
-layout_mode = 0
-offset_left = 64.0
-offset_top = 72.0
-offset_right = 191.0
-offset_bottom = 107.0
-theme_override_font_sizes/font_size = 24
-text = "Coin score:"
-
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=305264958]
-position = Vector2(40, 87.99999)
-scale = Vector2(2.4375, 2.437499)
-texture = SubResource("AtlasTexture_bo48s")
-
 [node name="SumGraphs" type="Label" parent="." unique_id=120869793]
 layout_mode = 0
 offset_left = 24.0
-offset_top = 107.0
+offset_top = 73.0
 offset_right = 252.0
-offset_bottom = 141.0
+offset_bottom = 107.0
 theme_override_font_sizes/font_size = 24
 text = "Sum graph nodes: 0"
 

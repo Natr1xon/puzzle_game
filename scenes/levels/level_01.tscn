@@ -1,7 +1,6 @@
 [gd_scene format=4 uid="uid://csaqxsulvx3u3"]
 
 [ext_resource type="Script" uid="uid://cbv8ucayt3g80" path="res://scripts/level_01/input_handler_1.gd" id="1_2djvx"]
-[ext_resource type="PackedScene" uid="uid://d1n18f7d7hqr2" path="res://scenes/objects/coin.tscn" id="2_r72dd"]
 [ext_resource type="Script" uid="uid://bpi7jvc4hd0hl" path="res://scripts/level_01/level_logic_1.gd" id="2_uvc87"]
 [ext_resource type="PackedScene" uid="uid://chs3ia44ls6on" path="res://scenes/objects/puzzle_object.tscn" id="3_qdh5e"]
 [ext_resource type="PackedScene" uid="uid://b617fba8fvuvo" path="res://scenes/player/player.tscn" id="4_uvc87"]
@@ -482,23 +481,6 @@ value = 2
 [node name="PuzzleObject5" parent="PuzzleContainer" unique_id=163901359 instance=ExtResource("3_qdh5e")]
 position = Vector2(118, -3)
 value = 3
-
-[node name="CoinContainer" type="Node2D" parent="." unique_id=1521833144]
-
-[node name="Coin" parent="CoinContainer" unique_id=215446502 groups=["coins"] instance=ExtResource("2_r72dd")]
-position = Vector2(-250, -24)
-
-[node name="Coin2" parent="CoinContainer" unique_id=1902642994 groups=["coins"] instance=ExtResource("2_r72dd")]
-position = Vector2(-192, -23)
-
-[node name="Coin3" parent="CoinContainer" unique_id=762573287 groups=["coins"] instance=ExtResource("2_r72dd")]
-position = Vector2(648, -22)
-
-[node name="Coin4" parent="CoinContainer" unique_id=418495209 groups=["coins"] instance=ExtResource("2_r72dd")]
-position = Vector2(556, -102)
-
-[node name="Coin5" parent="CoinContainer" unique_id=982289458 groups=["coins"] instance=ExtResource("2_r72dd")]
-position = Vector2(-86, -38)
 
 [node name="CheckButton" parent="." unique_id=1573709163 instance=ExtResource("6_kfebt")]
 position = Vector2(386, -79)

@@ -8,13 +8,11 @@ var is_highlighted = false
 var message_timer = null
 var original_modulate = Color.WHITE
 
-func update_label():
-	if label:
-		label.text = str(value)
-	else:
-		print("Ошибка: Label не найден в ", name)
+@export var min_value: int = 1
+@export var max_value: int = 9
 
 func _ready():
+	value = randi_range(min_value, max_value)
 	update_label()
 	print("Я появился:", value)
 	
@@ -22,21 +20,12 @@ func _ready():
 	
 	if sprite:
 		original_modulate = sprite.modulate
-	
-	if not get_node_or_null("CollisionShape2D"):
-		var collision = CollisionShape2D.new()
-		var shape = RectangleShape2D.new()
-		shape.extents = Vector2(32, 32)
-		collision.shape = shape
-		add_child(collision)
-	
-	var area = Area2D.new()
-	area.name = "InteractionArea"
-	var area_collision = CollisionShape2D.new()
-	area_collision.shape = RectangleShape2D.new()
-	area_collision.shape.extents = Vector2(40, 40)
-	area.add_child(area_collision)
-	add_child(area)
+
+func update_label():
+	if label:
+		label.text = str(value)
+	else:
+		print("Ошибка: Label не найден в ", name)
 
 func highlight(enable: bool):
 	is_highlighted = enable

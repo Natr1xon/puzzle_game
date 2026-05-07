@@ -67,6 +67,9 @@ func move_disk(from_peg: int, to_peg: int):
 	
 	level_logic.pegs[from_peg].pop_back()
 	level_logic.pegs[to_peg].append(disk)
+
+	if level_logic and level_logic.has_method("increment_moves"):
+		level_logic.increment_moves()
 	
 	tween = create_tween()
 	tween.set_ease(Tween.EASE_IN_OUT)
@@ -85,9 +88,6 @@ func move_disk(from_peg: int, to_peg: int):
 	level_logic.update_view()
 	
 	is_moving = false
-	
-	if level_logic.pegs[2].size() == 5:
-		Notify.success("ПОБЕДА! 🎉", 3.0)
 
 func interact_with_current_peg(peg_index: int):
 	handle_peg_clicked(peg_index)

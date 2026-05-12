@@ -10,10 +10,12 @@ var is_completed = false
 
 var DiskScene = preload("res://scenes/objects/disk.tscn")
 var input_handler = null
+@onready var main = get_tree().root.get_node("Main")
 
 func _ready():
 	add_to_group("level_logic")
 	await get_tree().process_frame
+	main.update_hud_info("Ходов сделано: " + str(moves_count))
 	show_tutorial()
 
 func show_tutorial():
@@ -157,7 +159,7 @@ func update_view():
 
 func increment_moves():
 	moves_count += 1
-	print("Ходов сделано: ", moves_count)
+	main.update_hud_info("Ходов сделано: " + str(moves_count))
 	check_win()
 
 func check_win():
@@ -166,7 +168,6 @@ func check_win():
 		show_completion_window()
 
 func show_completion_window():
-	var main = get_node("/root/Main")
 	if main and main.has_method("show_completion_window"):
 		var time_spent = (Time.get_ticks_msec() - start_time) / 1000.0
 		var minutes = floor(time_spent / 60)

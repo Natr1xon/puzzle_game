@@ -5,11 +5,9 @@ signal open_tutorial
 
 @onready var menu_button = $MenuButton
 @onready var tutorial_button = $TutorialButton  
-@onready var sum_label = $SumGraphs
+@onready var info_label = $InfoLabel
 
 func _ready():
-	sum_label.hide()
-
 	var shortcut = Shortcut.new()
 	var menu_events = InputMap.action_get_events("open_game_menu")
 	if menu_events.size() > 0:
@@ -31,14 +29,8 @@ func _on_menu_pressed():
 func _on_tutorial_pressed():
 	open_tutorial.emit()
 
-func update_sum(value: int):
-	sum_label.text = "Sum graph nodes: " + str(value)
+func update_info(string: String):
+	info_label.text = string
 
-func reset_sum():
-	update_sum(0)
-	
-func show_sum():
-	sum_label.show()
-	
-func hide_sum():
-	sum_label.hide()
+func reset_info():
+	update_info(' ')

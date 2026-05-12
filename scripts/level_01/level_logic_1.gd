@@ -7,10 +7,12 @@ var swap_count = 0
 var start_time = 0 
 
 @onready var feedback_label = $"../FeedbackLabel"
+@onready var main = get_tree().root.get_node("Main")
 
 func _ready():
 	add_to_group("level_logic")
 	await get_tree().process_frame
+	main.update_hud_info("Перестановок сделано: " + str(swap_count))
 	show_tutorial()
 
 func show_tutorial():
@@ -88,7 +90,7 @@ func get_objects():
 
 func increment_swap():
 	swap_count += 1
-	print("Перестановок сделано: ", swap_count)
+	main.update_hud_info("Перестановок сделано: " + str(swap_count))
 
 func check_answer(is_correct: bool):
 	if is_correct:
@@ -126,24 +128,6 @@ func check_win():
 
 	show_completion_window()
 
-func show_completion_window():
-	var main = get_node("/root/Main")
-	if main and main.has_method("show_completion_window"):
-		var time_spent = (Time.get_ticks_msec() - start_time) / 1000.0
-		var minutes = floor(time_spent / 60)
-		var seconds = int(time_spent) % 60 
-		var time_string = str(minutes) + "м " + str(seconds) + "с"
-		
-		main.show_completion_window("sorting", {
-			"attempts": attempts,
-			"swap_count": swap_count,
-			"min_swaps": calculate_min_swaps(),
-			"time_spent": time_string,
-			"completed": true,
-			"next_level": "res://scenes/levels/level_02.tscn"
-		})
-
-
 func calculate_min_swaps() -> int:
 	var objects = get_objects()
 	if objects.is_empty():
@@ -165,3 +149,19 @@ func calculate_min_swaps() -> int:
 				swaps += 1
 	
 	return swaps
+
+func show_completion_window():
+	if main and main.has_method("show_completion_window"):
+		var time_spent = (Time.get_ticks_msec() - start_time) / 1000.0
+		var minutes = floor(time_spent / 60)
+		var seconds = int(time_spent) % 60 
+		var time_string = str(minutes) + "м " + str(seconds) + "с"
+		
+		main.show_completion_window("sorting", {
+			"attempts": attempts,
+			"swap_count": swap_count,
+			"min_swaps": calculate_min_swaps(),
+			"time_spent": time_string,
+			"completed": true,
+			"next_level": "res://scenes/levels/level_02.tscn"
+		})

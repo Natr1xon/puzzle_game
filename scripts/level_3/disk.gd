@@ -4,8 +4,8 @@ var disk_size: int
 var colors = [
 	Color(0.95, 0.3, 0.3),
 	Color(0.3, 0.95, 0.3), 
-	Color(0.3, 0.5, 0.95),
 	Color(0.95, 0.95, 0.3), 
+	Color(0.3, 0.5, 0.95),
 	Color(0.95, 0.6, 0.3)  
 ]
 

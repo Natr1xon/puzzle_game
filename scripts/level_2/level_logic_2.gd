@@ -18,6 +18,7 @@ signal travel_failed(reason)
 func _ready():
 	add_to_group("level_logic")
 	await get_tree().process_frame
+	main.update_hud_info("Сумма значений узлов: " + str(total_value))
 	show_tutorial()
 
 func show_tutorial():
@@ -149,7 +150,7 @@ func _on_player_reached_node(node):
 	node.set_visited()
 
 	if main:
-		main.update_hud_sum(total_value)
+		main.update_hud_info("Сумма значений узлов: " + str(total_value))
 	
 	node_reached.emit(node)
 	print("✅ Текущий узел: ", node.node_name, 
@@ -172,9 +173,6 @@ func get_total_value() -> int:
 
 func reset_total():
 	total_value = 0
-	
-	if main:
-		main.update_hud_sum(0)
 
 func get_current_value() -> int:
 	return current_node.node_value if current_node else 0

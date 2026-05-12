@@ -19,15 +19,6 @@ offset_right = 96.0
 offset_bottom = 64.0
 text = "Menu"
 
-[node name="SumGraphs" type="Label" parent="." unique_id=120869793]
-layout_mode = 0
-offset_left = 24.0
-offset_top = 73.0
-offset_right = 252.0
-offset_bottom = 107.0
-theme_override_font_sizes/font_size = 24
-text = "Sum graph nodes: 0"
-
 [node name="TutorialButton" type="Button" parent="." unique_id=405260836]
 layout_mode = 0
 offset_left = 112.0
@@ -35,3 +26,12 @@ offset_top = 24.0
 offset_right = 207.0
 offset_bottom = 64.0
 text = "Tutorial"
+
+[node name="InfoLabel" type="Label" parent="." unique_id=120869793]
+layout_mode = 0
+offset_left = 24.0
+offset_top = 79.0
+offset_right = 252.0
+offset_bottom = 113.0
+theme_override_font_sizes/font_size = 24
+text = "Sum graph nodes: 0"

@@ -7,6 +7,9 @@
 [ext_resource type="PackedScene" uid="uid://b2nx2pwtgt5l6" path="res://scenes/ui/game_menu.tscn" id="5_6q06x"]
 [ext_resource type="PackedScene" uid="uid://ds0l753pdl3uc" path="res://scenes/ui/completion_window.tscn" id="6_ow5a4"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ow5a4"]
+bg_color = Color(0.23439205, 0.2610891, 0.34476, 1)
+
 [node name="Main" type="Node2D" unique_id=550959682]
 script = ExtResource("1_hyk8p")
 
@@ -24,11 +27,13 @@ layout_mode = 0
 offset_top = -610.0
 offset_right = 1284.0
 offset_bottom = 110.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_ow5a4")
 
 [node name="Label" type="Label" parent="MainMenu" unique_id=648107491]
 layout_mode = 0
+offset_left = -4.0
 offset_top = -610.0
-offset_right = 1284.0
+offset_right = 1280.0
 offset_bottom = -511.0
 theme_override_font_sizes/font_size = 70
 text = "The puzzle game"
@@ -50,12 +55,14 @@ layout_mode = 2
 text = "Exit"
 
 [node name="LevelSelectMenu" parent="." unique_id=24170390 instance=ExtResource("3_k2fmo")]
+visible = false
 
 [node name="LevelContainer" type="Node" parent="." unique_id=1989351724]
 
 [node name="UI" type="CanvasLayer" parent="." unique_id=2023271584]
 
 [node name="CompletionWindow" parent="UI" unique_id=331959973 instance=ExtResource("6_ow5a4")]
+visible = false
 z_index = 2
 anchors_preset = 15
 grow_horizontal = 2
@@ -63,5 +70,7 @@ grow_vertical = 2
 
 [node name="game_menu" parent="UI" unique_id=114386644 instance=ExtResource("5_6q06x")]
 process_mode = 3
+visible = false
 
 [node name="HUD" parent="UI" unique_id=34537194 instance=ExtResource("4_l3cfh")]
+visible = false

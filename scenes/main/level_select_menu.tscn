@@ -2,6 +2,9 @@
 
 [ext_resource type="Script" uid="uid://dpx8a0v4kngaf" path="res://scripts/ui/level_select_menu.gd" id="1_js8mu"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_js8mu"]
+bg_color = Color(0.23529412, 0.2627451, 0.34509805, 1)
+
 [node name="LevelSelectMenu" type="Control" unique_id=24170390]
 layout_mode = 3
 anchors_preset = 0
@@ -18,6 +21,7 @@ offset_left = -47.0
 offset_top = -697.0
 offset_right = 1237.0
 offset_bottom = 23.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_js8mu")
 
 [node name="GridContainer" type="GridContainer" parent="." unique_id=1927381951]
 layout_mode = 0
@@ -30,9 +34,19 @@ columns = 3
 [node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=676577866]
 layout_mode = 0
 offset_top = -32.0
-offset_right = 1194.0
+offset_right = 1178.0
 offset_bottom = -1.0
 
 [node name="BackButton" type="Button" parent="VBoxContainer" unique_id=1748828194]
 layout_mode = 2
 text = "Back"
+
+[node name="Label" type="Label" parent="." unique_id=2081420594]
+layout_mode = 0
+offset_left = -47.0
+offset_top = -697.0
+offset_right = 1237.0
+offset_bottom = -598.0
+theme_override_font_sizes/font_size = 70
+text = "The puzzle game"
+horizontal_alignment = 1

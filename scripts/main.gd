@@ -49,11 +49,6 @@ func _on_level_selected(path):
 	load_level(path)
 	ui.show()
 	hud.show()
-	
-	if "level_02" in current_level_path:
-		hud.show_sum()
-	else:
-		hud.hide_sum()
 
 	game_menu.hide()
 	get_tree().paused = false
@@ -110,8 +105,8 @@ func _on_restart_level():
 	if current_level_path != "":
 		load_level(current_level_path)
 	
-func update_hud_sum(value: int):
-	hud.update_sum(value)
+func update_hud_info(string: String):
+	hud.update_info(string)
 
 func load_level(path):
 	current_level_path = path

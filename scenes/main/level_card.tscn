@@ -2,9 +2,11 @@
 
 [ext_resource type="Script" uid="uid://c3o4028eektaw" path="res://scripts/ui/level_card.gd" id="1_4papr"]
 [ext_resource type="Texture2D" uid="uid://cqvlxh1x71a5r" path="res://assets/background/bluecity.jpg" id="2_pbfun"]
+[ext_resource type="StyleBox" uid="uid://km3nfb571j3q" path="res://styles/buttons/button_card.tres" id="3_j4wrh"]
+[ext_resource type="StyleBox" uid="uid://dnplwcw82ccid" path="res://styles/buttons/hover.tres" id="4_t518s"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pbfun"]
-bg_color = Color(0.23921569, 0.23921569, 0.33333334, 1)
+bg_color = Color(0.1969825, 0.19693497, 0.2784719, 1)
 border_width_left = 2
 border_width_top = 2
 border_width_right = 2
@@ -28,7 +30,7 @@ script = ExtResource("1_4papr")
 [node name="Panel" type="Panel" parent="." unique_id=1905583839]
 layout_mode = 0
 offset_right = 336.0
-offset_bottom = 290.0
+offset_bottom = 299.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_pbfun")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Panel" unique_id=1496252666]
@@ -51,6 +53,9 @@ layout_mode = 2
 text = "Уровень 1. Сортировка"
 horizontal_alignment = 1
 
+[node name="HSeparator" type="HSeparator" parent="Panel/VBoxContainer" unique_id=1567050761]
+layout_mode = 2
+
 [node name="Description" type="Label" parent="Panel/VBoxContainer" unique_id=1721813677]
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
@@ -65,4 +70,7 @@ max_lines_visible = 3
 [node name="Button" type="Button" parent="Panel/VBoxContainer" unique_id=83320128]
 layout_mode = 2
 size_flags_horizontal = 4
-text = " ▶ Play"
+theme_override_styles/normal = ExtResource("3_j4wrh")
+theme_override_styles/pressed = ExtResource("3_j4wrh")
+theme_override_styles/hover = ExtResource("4_t518s")
+text = " ▶ Играть"

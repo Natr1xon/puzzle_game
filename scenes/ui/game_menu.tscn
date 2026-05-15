@@ -2,6 +2,18 @@
 
 [ext_resource type="Script" uid="uid://de3gbduv0g1bw" path="res://scripts/ui/game_menu.gd" id="1_5s0hc"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6jy2e"]
+bg_color = Color(0.21568628, 0.21568628, 0.30980393, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.78957593, 0.789576, 0.78957576, 1)
+corner_radius_top_left = 13
+corner_radius_top_right = 13
+corner_radius_bottom_right = 13
+corner_radius_bottom_left = 13
+
 [node name="game_menu" type="Control" unique_id=114386644]
 layout_mode = 3
 anchors_preset = 8
@@ -26,6 +38,7 @@ offset_right = 100.0
 offset_bottom = 96.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_6jy2e")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Panel" unique_id=239680358]
 layout_mode = 1
@@ -43,21 +56,24 @@ grow_vertical = 2
 
 [node name="Label" type="Label" parent="Panel/VBoxContainer" unique_id=148292095]
 layout_mode = 2
-text = "Menu"
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+text = "Меню"
 horizontal_alignment = 1
 
 [node name="ResumeButton" type="Button" parent="Panel/VBoxContainer" unique_id=112416917]
 layout_mode = 2
-text = "Resume"
+text = "Продолжить"
 
 [node name="RestartButton" type="Button" parent="Panel/VBoxContainer" unique_id=617739724]
 layout_mode = 2
-text = "Restart"
+text = "Перезапуск"
 
 [node name="LevelSelectButton" type="Button" parent="Panel/VBoxContainer" unique_id=167267577]
 layout_mode = 2
-text = "Level select"
+text = "Выбор уровня"
 
 [node name="MainMenuButton" type="Button" parent="Panel/VBoxContainer" unique_id=1621688846]
 layout_mode = 2
-text = "Main menu"
+text = "Главное меню"

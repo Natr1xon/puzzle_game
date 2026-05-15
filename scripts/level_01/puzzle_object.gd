@@ -30,7 +30,7 @@ func update_label():
 func highlight(enable: bool):
 	is_highlighted = enable
 	if sprite:
-		sprite.modulate = Color.YELLOW if enable else original_modulate
+		sprite.modulate = Color.GREEN if enable else original_modulate
 
 func get_value():
 	return value

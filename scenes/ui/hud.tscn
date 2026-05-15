@@ -1,6 +1,9 @@
 [gd_scene format=3 uid="uid://bqnjpn64268ul"]
 
 [ext_resource type="Script" uid="uid://cflycggrswaa6" path="res://scripts/ui/hud.gd" id="1_0mwgc"]
+[ext_resource type="StyleBox" uid="uid://da7icfn806uel" path="res://styles/buttons/button_hud.tres" id="2_hqnrr"]
+[ext_resource type="StyleBox" uid="uid://dw3a8ji38vhuw" path="res://styles/buttons/hover_button_hud.tres" id="3_8qguk"]
+[ext_resource type="StyleBox" uid="uid://cd4uh6gayto02" path="res://styles/labels/background_text.tres" id="3_bo48s"]
 
 [node name="HUD" type="Control" unique_id=34537194]
 z_index = 4
@@ -17,7 +20,10 @@ offset_left = 24.0
 offset_top = 24.0
 offset_right = 96.0
 offset_bottom = 64.0
-text = "Menu"
+theme_override_styles/normal = ExtResource("2_hqnrr")
+theme_override_styles/pressed = ExtResource("2_hqnrr")
+theme_override_styles/hover = ExtResource("3_8qguk")
+text = "Меню"
 
 [node name="TutorialButton" type="Button" parent="." unique_id=405260836]
 layout_mode = 0
@@ -25,13 +31,18 @@ offset_left = 112.0
 offset_top = 24.0
 offset_right = 207.0
 offset_bottom = 64.0
+theme_override_styles/normal = ExtResource("2_hqnrr")
+theme_override_styles/pressed = ExtResource("2_hqnrr")
+theme_override_styles/hover = ExtResource("3_8qguk")
 text = "Tutorial"
 
 [node name="InfoLabel" type="Label" parent="." unique_id=120869793]
 layout_mode = 0
-offset_left = 24.0
+offset_left = 58.0
 offset_top = 79.0
-offset_right = 252.0
-offset_bottom = 113.0
-theme_override_font_sizes/font_size = 24
-text = "Sum graph nodes: 0"
+offset_right = 240.0
+offset_bottom = 104.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.6666667)
+theme_override_constants/shadow_outline_size = 2
+theme_override_styles/normal = ExtResource("3_bo48s")
+text = "❗ Sum graph nodes: 0"

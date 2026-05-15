@@ -17,19 +17,29 @@ func handle_peg_clicked(peg_index: int):
 	if is_moving:
 		Notify.warn("Подождите, диск перемещается...")
 		return
-	
+
 	if selected_peg == -1:
 		if not level_logic.pegs[peg_index].is_empty():
 			selected_peg = peg_index
 			level_logic.highlight_peg(selected_peg, true)
+
+			var disk = level_logic.pegs[selected_peg].back()
+			if disk and disk.has_method("highlight"):
+				disk.highlight(true)
+			
 			Notify.info("Выбран колышек " + str(selected_peg + 1))
 		else:
 			Notify.warn("На этом колышке нет дисков!")
+
 	else:
 		if selected_peg != peg_index:
 			await move_disk(selected_peg, peg_index)
 		else:
-			Notify.info("Отмена выбора")
+			Notify.warn("Нельзя переместить диск \n на тот же колышек!")
+
+		var old_disk = level_logic.pegs[selected_peg].back() if not level_logic.pegs[selected_peg].is_empty() else null
+		if old_disk and old_disk.has_method("highlight"):
+			old_disk.highlight(false)
 		
 		level_logic.highlight_peg(selected_peg, false)
 		selected_peg = -1
@@ -45,7 +55,7 @@ func move_disk(from_peg: int, to_peg: int):
 
 	if not level_logic.pegs[to_peg].is_empty():
 		if disk.disk_size > level_logic.pegs[to_peg].back().disk_size:
-			Notify.error("Нельзя положить большой диск на маленький!")
+			Notify.error("Нельзя положить большой диск \n на маленький!")
 			is_moving = false
 			return
 	
@@ -86,6 +96,9 @@ func move_disk(from_peg: int, to_peg: int):
 	await tween.finished
 	
 	level_logic.update_view()
+	
+	if disk and disk.has_method("highlight"):
+		disk.highlight(false)
 	
 	is_moving = false
 

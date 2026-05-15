@@ -15,7 +15,7 @@ var input_handler = null
 func _ready():
 	add_to_group("level_logic")
 	await get_tree().process_frame
-	main.update_hud_info("Ходов сделано: " + str(moves_count))
+	main.update_hud_info("❗Ходов сделано: " + str(moves_count))
 	show_tutorial()
 
 func show_tutorial():
@@ -96,7 +96,7 @@ func start_game():
 	
 	init_game()
 	
-	Notify.info("Переместите все диски на правый стержень!", 3.0)
+	Notify.info("Переместите все диски \n на правый стержень!", 3.0)
 
 func on_player_entered_peg_zone(peg_index: int):
 	print(peg_index)
@@ -159,12 +159,13 @@ func update_view():
 
 func increment_moves():
 	moves_count += 1
-	main.update_hud_info("Ходов сделано: " + str(moves_count))
+	main.update_hud_info("❗Ходов сделано: " + str(moves_count))
 	check_win()
 
 func check_win():
 	if not is_completed and pegs[2].size() == 5:
 		is_completed = true
+		await get_tree().create_timer(1.0).timeout
 		show_completion_window()
 
 func show_completion_window():

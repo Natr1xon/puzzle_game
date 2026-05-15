@@ -2,7 +2,17 @@
 
 [ext_resource type="Script" uid="uid://cpqv4ajatynru" path="res://scripts/level_3/disk.gd" id="1_y1rs8"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_y1rs8"]
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
+shadow_size = 2
+shadow_offset = Vector2(1, 1)
+anti_aliasing = false
+
 [node name="Panel" type="Panel" unique_id=49342159]
-offset_right = 40.0
-offset_bottom = 40.0
+offset_right = 164.0
+offset_bottom = 25.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_y1rs8")
 script = ExtResource("1_y1rs8")

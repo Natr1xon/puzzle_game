@@ -11,31 +11,53 @@ var colors = [
 
 var tween: Tween
 var is_animating = false
+var default_style: StyleBoxFlat
+var is_highlighted = false
 
 func setup(s: int):
 	disk_size = s
 	var width = 20 * s
 	var height = 20
 	self.size = Vector2(width, height)
-	self.modulate = colors[s - 1]
 	
+	apply_style(false)
+
+func apply_style(highlight: bool):
 	var style = StyleBoxFlat.new()
-	style.bg_color = colors[s - 1]
+	style.bg_color = colors[disk_size - 1]
 	style.corner_radius_top_left = 15
 	style.corner_radius_top_right = 15
 	style.corner_radius_bottom_left = 15
 	style.corner_radius_bottom_right = 15
-	
-	# Тень
+	style.anti_aliasing = false  
 	style.shadow_size = 4
 	style.shadow_offset = Vector2(2, 2)
 	style.shadow_color = Color(0, 0, 0, 0.3)
 	
+	if highlight:
+		style.border_width_left = 1
+		style.border_width_right = 1
+		style.border_width_top = 1
+		style.border_width_bottom = 1
+		style.border_color = Color.WHITE
+		style.shadow_size = 0
+	
 	add_theme_stylebox_override("panel", style)
+
+func highlight(enabled: bool):
+	is_highlighted = enabled
+	apply_style(enabled)
+
+func reset_style():
+	add_theme_stylebox_override("panel", default_style.duplicate())
 
 func animate_move_to(new_position: Vector2, duration: float = 0.15):
 	if is_animating:
 		return
+	
+	var had_highlight = is_highlighted
+	if had_highlight:
+		apply_style(false)
 	
 	is_animating = true
 
@@ -53,6 +75,10 @@ func animate_move_to(new_position: Vector2, duration: float = 0.15):
 	tween.tween_property(self, "scale", original_scale, duration * 0.7)
 	
 	await tween.finished
+
+	if had_highlight:
+		apply_style(true)
+	
 	is_animating = false
 
 func move_instant(new_position: Vector2):

@@ -2,6 +2,8 @@ extends CanvasLayer
 
 var message_queue = []
 var is_showing = false
+var current_message = null 
+var current_tween = null    
 
 func _ready():
 	process_mode = PROCESS_MODE_ALWAYS
@@ -22,6 +24,34 @@ func setup_ui():
 	container.anchor_top = 0.0
 	add_child(container)
 
+func clear_now():
+	if current_tween and current_tween.is_valid():
+		current_tween.kill()
+	
+	if current_message and is_instance_valid(current_message):
+		current_message.queue_free()
+		current_message = null
+
+	is_showing = false
+
+	message_queue.clear()
+	
+	print("Все уведомления срочно очищены")
+
+func skip_current():
+	if current_message and is_instance_valid(current_message):
+		if current_tween and current_tween.is_valid():
+			current_tween.kill()
+		
+		current_message.modulate = Color(1, 1, 1, 0)
+		current_message.queue_free()
+		current_message = null
+	
+	is_showing = false
+	current_tween = null
+
+	show_next_message()
+
 func show_message(text: String, duration: float = 2.0):
 	message_queue.append({
 		"text": text,
@@ -34,27 +64,30 @@ func show_message(text: String, duration: float = 2.0):
 func show_next_message():
 	if message_queue.is_empty():
 		is_showing = false
+		current_message = null
 		return
 	
 	is_showing = true
 	var msg = message_queue.pop_front()
 	
-	var msg_panel = create_notification(msg.text)
-	add_child(msg_panel)
+	current_message = create_notification(msg.text)
+	add_child(current_message)
 	
-	msg_panel.modulate = Color(1, 1, 1, 0)
-	var tween = create_tween()
-	tween.tween_property(msg_panel, "modulate", Color(1, 1, 1, 1), 0.2)
+	current_message.modulate = Color(1, 1, 1, 0)
+	current_tween = create_tween()
+	current_tween.tween_property(current_message, "modulate", Color(1, 1, 1, 1), 0.2)
 	
 	await get_tree().create_timer(msg.duration).timeout
 	
-	if msg_panel and is_instance_valid(msg_panel):
-		tween = create_tween()
-		tween.tween_property(msg_panel, "modulate", Color(1, 1, 1, 0), 0.2)
-		await tween.finished
-		msg_panel.queue_free()
+	if current_message and is_instance_valid(current_message):
+		current_tween = create_tween()
+		current_tween.tween_property(current_message, "modulate", Color(1, 1, 1, 0), 0.2)
+		await current_tween.finished
+		current_message.queue_free()
+		current_message = null
 	
 	await get_tree().create_timer(0.1).timeout
+	current_tween = null
 	show_next_message()
 
 func create_notification(text: String) -> Panel:

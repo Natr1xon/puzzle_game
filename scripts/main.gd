@@ -85,6 +85,8 @@ func _on_level_select_from_game():
 	for child in level_container.get_children():
 		child.queue_free()
 	
+	Notify.clear_now()
+	
 	game_menu.hide()
 	hud.hide()
 	level_select.show()
@@ -94,6 +96,8 @@ func _on_main_menu_from_game():
 
 	for child in level_container.get_children():
 		child.queue_free()
+	
+	Notify.clear_now()
 
 	game_menu.hide()
 	hud.hide()

@@ -12,7 +12,7 @@ var start_time = 0
 func _ready():
 	add_to_group("level_logic")
 	await get_tree().process_frame
-	main.update_hud_info("Перестановок сделано: " + str(swap_count))
+	main.update_hud_info("❗Перестановок сделано: " + str(swap_count))
 	show_tutorial()
 
 func show_tutorial():
@@ -77,7 +77,7 @@ func show_tutorial_again(first_time = false):
 func start_game():
 	swap_count = 0
 	start_time = Time.get_ticks_msec()
-	feedback_label.text = "Sort"
+	feedback_label.text = "Сортировка"
 
 	Notify.info("Расставьте числа в правильном порядке!", 3.0)
 
@@ -90,17 +90,17 @@ func get_objects():
 
 func increment_swap():
 	swap_count += 1
-	main.update_hud_info("Перестановок сделано: " + str(swap_count))
+	main.update_hud_info("❗Перестановок сделано: " + str(swap_count))
 
 func check_answer(is_correct: bool):
 	if is_correct:
-		feedback_label.text = "Correct!"
+		feedback_label.text = "Правильно!"
 		feedback_label.modulate = Color.GREEN
 	else:
 		attempts += 1
-		feedback_label.text = "Incorrect!"
+		feedback_label.text = "Неправильно!"
 		feedback_label.modulate = Color.RED
-		Notify.error("Неправильный порядок! Попробуйте еще раз", 2.0)
+		Notify.error("Неправильный порядок! \n Попробуйте еще раз", 2.0)
 
 	await get_tree().create_timer(2.0).timeout
 

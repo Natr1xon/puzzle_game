@@ -487,10 +487,12 @@ position = Vector2(386, -79)
 
 [node name="FeedbackLabel" type="Label" parent="." unique_id=651166233]
 offset_left = 346.0
-offset_top = -135.0
+offset_top = -132.0
 offset_right = 426.0
-offset_bottom = -112.0
-text = "Sort"
+offset_bottom = -109.0
+theme_override_font_sizes/font_size = 11
+text = "Сортировка"
+horizontal_alignment = 1
 
 [node name="Back" type="TileMapLayer" parent="." unique_id=555651767]
 z_index = -1

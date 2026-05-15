@@ -18,7 +18,7 @@ signal travel_failed(reason)
 func _ready():
 	add_to_group("level_logic")
 	await get_tree().process_frame
-	main.update_hud_info("Сумма значений узлов: " + str(total_value))
+	main.update_hud_info("❗Сумма значений узлов: " + str(total_value))
 	show_tutorial()
 
 func show_tutorial():
@@ -88,7 +88,7 @@ func start_game():
 		if node.has_signal("player_entered"):
 			node.player_entered.connect(_on_player_reached_node)
 	
-	Notify.info("Исследуйте граф! Посетите 5 узлов!", 3.0)
+	Notify.info("Исследуйте граф! \n Посетите 5 узлов!", 3.0)
 
 func find_all_nodes():
 	all_nodes = get_tree().get_nodes_in_group("travel_nodes")
@@ -150,7 +150,7 @@ func _on_player_reached_node(node):
 	node.set_visited()
 
 	if main:
-		main.update_hud_info("Сумма значений узлов: " + str(total_value))
+		main.update_hud_info("❗Сумма значений узлов: " + str(total_value))
 	
 	node_reached.emit(node)
 	print("✅ Текущий узел: ", node.node_name, 

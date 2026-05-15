@@ -1,9 +1,11 @@
 [gd_scene format=3 uid="uid://ciuw4bvq8iwy2"]
 
 [ext_resource type="Script" uid="uid://dpx8a0v4kngaf" path="res://scripts/ui/level_select_menu.gd" id="1_js8mu"]
+[ext_resource type="StyleBox" uid="uid://c85ebif6grdgu" path="res://styles/buttons/button_menu.tres" id="2_r5vni"]
+[ext_resource type="StyleBox" uid="uid://bh7oqrlbrpnod" path="res://styles/buttons/hover_button_menu.tres" id="3_pd5jy"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_js8mu"]
-bg_color = Color(0.23529412, 0.2627451, 0.34509805, 1)
+bg_color = Color(0.23921569, 0.23921569, 0.33333334, 1)
 
 [node name="LevelSelectMenu" type="Control" unique_id=24170390]
 layout_mode = 3
@@ -39,7 +41,10 @@ offset_bottom = -1.0
 
 [node name="BackButton" type="Button" parent="VBoxContainer" unique_id=1748828194]
 layout_mode = 2
-text = "Back"
+theme_override_styles/normal = ExtResource("2_r5vni")
+theme_override_styles/pressed = ExtResource("2_r5vni")
+theme_override_styles/hover = ExtResource("3_pd5jy")
+text = "Назад"
 
 [node name="Label" type="Label" parent="." unique_id=2081420594]
 layout_mode = 0
@@ -47,6 +52,10 @@ offset_left = -47.0
 offset_top = -697.0
 offset_right = 1237.0
 offset_bottom = -598.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 4
+theme_override_constants/shadow_offset_y = 4
+theme_override_constants/shadow_outline_size = 2
 theme_override_font_sizes/font_size = 70
 text = "The puzzle game"
 horizontal_alignment = 1

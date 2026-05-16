@@ -13,6 +13,7 @@ signal menu_requested
 
 var current_level = ""
 var next_level_path = ""
+var can_advance = false
 
 func _ready():
 	hide()
@@ -22,7 +23,9 @@ func show_summary(level: String, data: Dictionary):
 	current_level = level
 	next_level_path = data.get("next_level", "")
 	
-	style_buttons(data.get("completed", false))
+	can_advance = evaluate_performance(level, data)
+	
+	style_buttons(data.get("completed", false) and can_advance)
 
 	match level:
 		"sorting":
@@ -45,6 +48,32 @@ func show_summary(level: String, data: Dictionary):
 	tween.tween_property(self, "scale", final_scale, 0.25)
 	
 	get_tree().paused = true
+
+func evaluate_performance(level: String, data: Dictionary) -> bool:
+	match level:
+		"sorting":
+			var swap_count = data.get("swap_count", 0)
+			var min_swaps = data.get("min_swaps", 0)
+			if min_swaps > 0:
+				var efficiency = float(min_swaps) / float(swap_count) * 100
+				return efficiency >= 70
+			return swap_count <= 20 
+		
+		"graph":
+			var total_sum = data.get("total_sum", 0)
+			var optimal_sum = data.get("optimal_sum", 0)
+			if optimal_sum > 0:
+				var diff_percent = float(total_sum - optimal_sum) / float(optimal_sum) * 100
+				return diff_percent <= 20
+			return total_sum <= 50 
+		
+		"tower":
+			var moves = data.get("moves", 0)
+			var optimal_moves = data.get("optimal_moves", 31)
+			var extra_moves = moves - optimal_moves
+			return extra_moves <= 10
+	
+	return true
 
 func show_sorting_summary(data: Dictionary):
 	title_label.text = "📊 УРОВЕНЬ 1: СОРТИРОВКА"
@@ -69,18 +98,17 @@ func show_sorting_summary(data: Dictionary):
 		elif efficiency >= 60:
 			info_text += "📚 Хорошо, но можно лучше (" + str(round(efficiency)) + "%)\n"
 		else:
-			info_text += "💪 В следующий раз получится лучше (" + str(round(efficiency)) + "%)\n"
+			info_text += "💪 Слишком много перестановок. Попробуйте найти более эффективное решение.\n"
 	
 	info_text += "⏱ Время: " + time_spent
 	
 	info_label.text = info_text
 	
-	if data.get("completed", false):
-		status_label.text = "✅ УРОВЕНЬ ПРОЙДЕН!"
-		status_label.add_theme_color_override("font_color", Color.GREEN)
-	else:
-		status_label.text = "⚠️ УРОВЕНЬ НЕ ПРОЙДЕН"
-		status_label.add_theme_color_override("font_color", Color.YELLOW)
+	status_label.text = "✅ УРОВЕНЬ ПРОЙДЕН!"
+	status_label.add_theme_color_override("font_color", Color.GREEN)
+	
+	if not can_advance:
+		status_label.text += " (Нужно больше эффективности для перехода)"
 
 func show_graph_summary(data: Dictionary):
 	title_label.text = "🗺 УРОВЕНЬ 2: ГРАФЫ"
@@ -96,27 +124,27 @@ func show_graph_summary(data: Dictionary):
 	
 	if optimal_sum > 0:
 		var diff = total_sum - optimal_sum
+		var diff_percent = float(diff) / float(optimal_sum) * 100
 		
 		info_text += "🎯 Оптимальная сумма: " + str(optimal_sum) + "\n"
-		info_text += "📊 Разница: " + str(diff) + "\n"
+		info_text += "📊 Разница: " + str(diff) + " (+" + str(round(diff_percent)) + "%)\n"
 
 		if diff == 0:
 			info_text += "⭐ ИДЕАЛЬНО! Вы нашли кратчайший путь!\n"
-		elif diff <= optimal_sum * 0.2:
+		elif diff_percent <= 20:
 			info_text += "👍 ОТЛИЧНО! Путь близок к оптимальному\n"
-		elif diff <= optimal_sum * 0.5:
+		elif diff_percent <= 50:
 			info_text += "📚 ХОРОШО, но можно найти путь короче\n"
 		else:
-			info_text += "💪 Есть куда расти! Попробуйте найти другой маршрут\n"
+			info_text += "💪 Слишком большой перебор. Попробуйте найти более короткий маршрут\n"
 	
 	info_label.text = info_text
 	
-	if visited >= total_visited:
-		status_label.text = "✅ ЗАДАНИЕ ВЫПОЛНЕНО!"
-		status_label.add_theme_color_override("font_color", Color.GREEN)
-	else:
-		status_label.text = "⚠️ ЗАДАНИЕ НЕ ВЫПОЛНЕНО"
-		status_label.add_theme_color_override("font_color", Color.YELLOW)
+	status_label.text = "✅ ЗАДАНИЕ ВЫПОЛНЕНО!"
+	status_label.add_theme_color_override("font_color", Color.GREEN)
+	
+	if not can_advance:
+		status_label.text += " (Нужно найти более короткий путь)"
 
 func show_tower_summary(data: Dictionary):
 	title_label.text = "🗼 УРОВЕНЬ 3: ХАНОЙСКАЯ БАШНЯ"
@@ -124,6 +152,7 @@ func show_tower_summary(data: Dictionary):
 	var moves = data.get("moves", 0)
 	var optimal_moves = data.get("optimal_moves", 31)
 	var time_spent = data.get("time_spent", "0с")
+	var extra_moves = moves - optimal_moves
 
 	var info_text = ""
 	info_text += "🎮 Сделано ходов: " + str(moves) + "\n"
@@ -131,22 +160,21 @@ func show_tower_summary(data: Dictionary):
 
 	if moves <= optimal_moves:
 		info_text += "⭐ ИДЕАЛЬНО! Минимальное количество ходов!\n"
-	elif moves <= optimal_moves + 5:
-		info_text += "👍 Отлично! Всего +" + str(moves - optimal_moves) + " ход(ов)\n"
-	elif moves <= optimal_moves + 15:
-		info_text += "📚 Хорошо, но можно лучше (+" + str(moves - optimal_moves) + ")\n"
+	elif extra_moves <= 5:
+		info_text += "👍 Отлично! Всего +" + str(extra_moves) + " ход(ов)\n"
+	elif extra_moves <= 15:
+		info_text += "📚 Хорошо, но можно лучше (+" + str(extra_moves) + ")\n"
 	else:
-		info_text += "💪 Практикуйтесь дальше (+" + str(moves - optimal_moves) + " ход(ов))\n"
+		info_text += "💪 Слишком много лишних ходов (+" + str(extra_moves) + "). Попробуйте найти оптимальную стратегию.\n"
 
 	info_text += "\n⏱ Время: " + time_spent
 	info_label.text = info_text
 	
-	if data.get("completed", false):
-		status_label.text = "✅ БАШНЯ СОБРАНА!"
-		status_label.add_theme_color_override("font_color", Color.GREEN)
-	else:
-		status_label.text = "⚠️ БАШНЯ НЕ СОБРАНА"
-		status_label.add_theme_color_override("font_color", Color.YELLOW)
+	status_label.text = "✅ БАШНЯ СОБРАНА!"
+	status_label.add_theme_color_override("font_color", Color.GREEN)
+	
+	if not can_advance:
+		status_label.text += " (Нужно меньше лишних ходов)"
 
 func style_buttons(completed: bool):
 	for child in buttons_container.get_children():
@@ -170,7 +198,7 @@ func style_buttons(completed: bool):
 	hbox.add_theme_constant_override("separation", 15)
 	
 	var restart_btn = Button.new()
-	restart_btn.text = "ЗАНОВО"
+	restart_btn.text = "Заново"
 	restart_btn.custom_minimum_size = Vector2(120, 40)
 	restart_btn.add_theme_stylebox_override("normal", button_style)
 	restart_btn.add_theme_stylebox_override("hover", hover_style)
@@ -178,22 +206,30 @@ func style_buttons(completed: bool):
 	hbox.add_child(restart_btn)
 	
 	var menu_btn = Button.new()
-	menu_btn.text = "ГЛАВНОЕ МЕНЮ"
+	menu_btn.text = "Главное меню"
 	menu_btn.custom_minimum_size = Vector2(140, 40)
 	menu_btn.add_theme_stylebox_override("normal", button_style.duplicate())
 	menu_btn.add_theme_stylebox_override("hover", hover_style.duplicate())
 	menu_btn.pressed.connect(_on_menu_pressed)
 	hbox.add_child(menu_btn)
 	
-	if completed and next_level_path != "":
+	if completed and next_level_path != "" and can_advance:
 		var next_btn = Button.new()
-		next_btn.text = "СЛЕДУЮЩИЙ УРОВЕНЬ →"
+		next_btn.text = "Следующий уровень →"
 		next_btn.custom_minimum_size = Vector2(160, 40)
 		next_btn.add_theme_stylebox_override("normal", button_style.duplicate())
 		next_btn.add_theme_stylebox_override("hover", hover_style.duplicate())
 		next_btn.add_theme_color_override("font_color", Color.YELLOW)
 		next_btn.pressed.connect(_on_next_level_pressed)
 		hbox.add_child(next_btn)
+	elif completed and next_level_path != "":
+		var warning_btn = Button.new()
+		warning_btn.text = "🔒 Нужно лучше"
+		warning_btn.custom_minimum_size = Vector2(160, 40)
+		warning_btn.disabled = true
+		warning_btn.add_theme_color_override("font_color", Color.GRAY)
+		warning_btn.add_theme_stylebox_override("normal", button_style.duplicate())
+		hbox.add_child(warning_btn)
 	
 	buttons_container.add_child(hbox)
 

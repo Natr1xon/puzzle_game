@@ -521,7 +521,7 @@ node_name = "L"
 [node name="Connections" type="Node2D" parent="." unique_id=1935626957]
 
 [node name="CheckButton" parent="." unique_id=1573709163 instance=ExtResource("7_yklhy")]
-position = Vector2(1566, -81)
+position = Vector2(1543, -81)
 
 [node name="Back" type="TileMapLayer" parent="." unique_id=656803696]
 z_index = -1

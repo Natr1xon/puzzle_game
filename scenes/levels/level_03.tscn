@@ -460,7 +460,6 @@ tile_map_data = PackedByteArray("AADz/wAAAAAAAAAAAAD0/wAAAAABAAAAAAD1/wAAAAABAAA
 tile_set = SubResource("TileSet_lcxk4")
 
 [node name="Background" type="Sprite2D" parent="." unique_id=73011916]
-visible = false
 z_index = -2
 position = Vector2(-168, -224)
 texture = ExtResource("4_ps4tf")

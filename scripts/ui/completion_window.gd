@@ -10,6 +10,7 @@ signal menu_requested
 @onready var info_label = $Panel/VBoxContainer/InfoLabel
 @onready var status_label = $Panel/VBoxContainer/StatusLabel
 @onready var buttons_container = $Panel/VBoxContainer/ButtonsContainer
+@onready var stars_container = $Panel/VBoxContainer/StarsContainer 
 
 var current_level = ""
 var next_level_path = ""
@@ -23,7 +24,12 @@ func show_summary(level: String, data: Dictionary):
 	current_level = level
 	next_level_path = data.get("next_level", "")
 	
-	can_advance = evaluate_performance(level, data)
+	var earned_stars = calculate_stars_for_level(level, data)
+	data["stars"] = earned_stars 
+	
+	show_stars(earned_stars)
+	
+	can_advance = earned_stars >= 1
 	
 	style_buttons(data.get("completed", false) and can_advance)
 
@@ -48,6 +54,53 @@ func show_summary(level: String, data: Dictionary):
 	tween.tween_property(self, "scale", final_scale, 0.25)
 	
 	get_tree().paused = true
+	
+func calculate_stars_for_level(level: String, data: Dictionary) -> int:
+	match level:
+		"sorting":
+			var swap_count = data.get("swap_count", 0)
+			var min_swaps = data.get("min_swaps", 0)
+			if min_swaps > 0 and swap_count > 0:
+				var efficiency = float(min_swaps) / float(swap_count)
+				if efficiency >= 0.9: return 3
+				if efficiency >= 0.7: return 2
+				if efficiency >= 0.5: return 1
+			return 0
+		
+		"graph":
+			var total_sum = data.get("total_sum", 0)
+			var optimal_sum = data.get("optimal_sum", 0)
+			if optimal_sum > 0:
+				var diff_percent = float(total_sum - optimal_sum) / float(optimal_sum)
+				if diff_percent <= 0.1: return 3
+				if diff_percent <= 0.2: return 2
+				if diff_percent <= 0.4: return 1
+			return 0
+		
+		"tower":
+			var moves = data.get("moves", 0)
+			var optimal_moves = data.get("optimal_moves", 31)
+			var extra_moves = moves - optimal_moves
+			if extra_moves <= 0: return 3
+			if extra_moves <= 5: return 2
+			if extra_moves <= 10: return 1
+			return 0
+	
+	return 0
+
+func show_stars(count: int):
+	if not stars_container:
+		return
+	
+	for child in stars_container.get_children():
+		child.queue_free()
+	
+	for i in range(3):
+		var star = Label.new()
+		star.text = "⭐" if i < count else "☆"
+		star.add_theme_font_size_override("font_size", 32)
+		star.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+		stars_container.add_child(star)
 
 func evaluate_performance(level: String, data: Dictionary) -> bool:
 	match level:

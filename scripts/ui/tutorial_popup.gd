@@ -42,7 +42,7 @@ func show_page():
 	panel.position = Vector2(viewport_size.x / 2 - 300, viewport_size.y / 2 - 250)
 	
 	var style = StyleBoxFlat.new()
-	style.bg_color = Color(0.2, 0.2, 0.3, 0.95)
+	style.bg_color = Color("33334df2")
 	style.corner_radius_top_left = 20
 	style.corner_radius_top_right = 20
 	style.corner_radius_bottom_left = 20

@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://b40wggi05wcu0" path="res://scripts/ui/completion_window.gd" id="1_gppg0"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gppg0"]
-bg_color = Color(0.21568628, 0.21568628, 0.30980393, 1)
+bg_color = Color(0.2, 0.2, 0.3019608, 0.9490196)
 border_width_left = 2
 border_width_top = 2
 border_width_right = 2
@@ -50,6 +50,23 @@ offset_bottom = -20.0
 layout_mode = 2
 text = "Заголовок"
 horizontal_alignment = 1
+
+[node name="StarsContainer" type="HBoxContainer" parent="Panel/VBoxContainer" unique_id=20761567]
+layout_mode = 2
+theme_override_constants/separation = 8
+alignment = 1
+
+[node name="Star1" type="Label" parent="Panel/VBoxContainer/StarsContainer" unique_id=1977772740]
+layout_mode = 2
+text = "☆"
+
+[node name="Star2" type="Label" parent="Panel/VBoxContainer/StarsContainer" unique_id=1786554315]
+layout_mode = 2
+text = "☆"
+
+[node name="Star3" type="Label" parent="Panel/VBoxContainer/StarsContainer" unique_id=1106259411]
+layout_mode = 2
+text = "☆"
 
 [node name="HSeparator" type="HSeparator" parent="Panel/VBoxContainer" unique_id=1179882633]
 layout_mode = 2

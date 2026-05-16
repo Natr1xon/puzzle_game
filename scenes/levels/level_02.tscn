@@ -1,6 +1,5 @@
 [gd_scene format=4 uid="uid://rhekrcx6c3sk"]
 
-[ext_resource type="Script" uid="uid://bk3xnn76eyu50" path="res://scripts/level_02.gd" id="1_4hx2o"]
 [ext_resource type="PackedScene" uid="uid://cf043gxy2xtfm" path="res://scenes/kill_zone.tscn" id="2_3acmf"]
 [ext_resource type="Script" uid="uid://butwwa1httray" path="res://scripts/level_2/input_handler_2.gd" id="3_3acmf"]
 [ext_resource type="Script" uid="uid://dkeusvrfxyf0x" path="res://scripts/level_2/level_logic_2.gd" id="3_a3l5x"]
@@ -443,7 +442,6 @@ sources/0 = SubResource("TileSetAtlasSource_3acmf")
 distance = -45.0
 
 [node name="Level" type="Node2D" unique_id=839377777]
-script = ExtResource("1_4hx2o")
 
 [node name="LevelLogic" type="Node2D" parent="." unique_id=1163777651]
 script = ExtResource("3_a3l5x")

@@ -22,6 +22,7 @@ buses/default_bus_layout=""
 [autoload]
 
 Notify="*uid://wln6bs8yshlc"
+SaveSystem="*uid://dk5cv1xjq6ra3"
 
 [display]
 

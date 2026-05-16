@@ -5,7 +5,7 @@
 [ext_resource type="StyleBox" uid="uid://bh7oqrlbrpnod" path="res://styles/buttons/hover_button_menu.tres" id="3_pd5jy"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_js8mu"]
-bg_color = Color(0.23921569, 0.23921569, 0.33333334, 1)
+bg_color = Color(0.2, 0.2, 0.3019608, 0.9490196)
 
 [node name="LevelSelectMenu" type="Control" unique_id=24170390]
 layout_mode = 3
@@ -35,9 +35,16 @@ columns = 3
 
 [node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=676577866]
 layout_mode = 0
-offset_top = -32.0
+offset_top = -62.0
 offset_right = 1178.0
-offset_bottom = -1.0
+offset_bottom = -8.0
+
+[node name="ResetButton" type="Button" parent="VBoxContainer" unique_id=1144604390]
+layout_mode = 2
+theme_override_styles/normal = ExtResource("2_r5vni")
+theme_override_styles/pressed = ExtResource("2_r5vni")
+theme_override_styles/hover = ExtResource("3_pd5jy")
+text = "Сбросить сохранение"
 
 [node name="BackButton" type="Button" parent="VBoxContainer" unique_id=1748828194]
 layout_mode = 2

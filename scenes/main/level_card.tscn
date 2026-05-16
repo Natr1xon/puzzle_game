@@ -6,7 +6,7 @@
 [ext_resource type="StyleBox" uid="uid://dnplwcw82ccid" path="res://styles/buttons/hover.tres" id="4_t518s"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pbfun"]
-bg_color = Color(0.1969825, 0.19693497, 0.2784719, 1)
+bg_color = Color(0.24677628, 0.24674794, 0.34413934, 1)
 border_width_left = 2
 border_width_top = 2
 border_width_right = 2
@@ -30,7 +30,7 @@ script = ExtResource("1_4papr")
 [node name="Panel" type="Panel" parent="." unique_id=1905583839]
 layout_mode = 0
 offset_right = 336.0
-offset_bottom = 299.0
+offset_bottom = 326.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_pbfun")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Panel" unique_id=1496252666]
@@ -39,7 +39,7 @@ anchors_preset = -1
 offset_left = 10.0
 offset_top = 10.0
 offset_right = 325.0
-offset_bottom = 10.0
+offset_bottom = 315.0
 
 [node name="TextureRect" type="TextureRect" parent="Panel/VBoxContainer" unique_id=1167877832]
 custom_minimum_size = Vector2(200, 150)
@@ -55,6 +55,23 @@ horizontal_alignment = 1
 
 [node name="HSeparator" type="HSeparator" parent="Panel/VBoxContainer" unique_id=1567050761]
 layout_mode = 2
+
+[node name="StarsContainer" type="HBoxContainer" parent="Panel/VBoxContainer" unique_id=921606872]
+layout_mode = 2
+theme_override_constants/separation = 8
+alignment = 1
+
+[node name="Star1" type="Label" parent="Panel/VBoxContainer/StarsContainer" unique_id=1231280175]
+layout_mode = 2
+text = "☆"
+
+[node name="Star2" type="Label" parent="Panel/VBoxContainer/StarsContainer" unique_id=67735483]
+layout_mode = 2
+text = "☆"
+
+[node name="Star3" type="Label" parent="Panel/VBoxContainer/StarsContainer" unique_id=845179150]
+layout_mode = 2
+text = "☆"
 
 [node name="Description" type="Label" parent="Panel/VBoxContainer" unique_id=1721813677]
 custom_minimum_size = Vector2(0, 50)

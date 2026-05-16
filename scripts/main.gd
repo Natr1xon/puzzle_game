@@ -13,8 +13,6 @@ var current_level_path = ""
 var current_level_instance = null
 
 func _ready():
-	print_tree_pretty()
-
 	menu.show()
 	level_select.hide()
 	ui.hide()
@@ -40,11 +38,18 @@ func _ready():
 
 	print("MAIN ЗАПУЩЕН")
 
+	update_level_select()
+
 func _on_start_game():
 	menu.hide()
 	level_select.show()
 
 func _on_level_selected(path):
+	var level_id = extract_level_id(path)
+	if not SaveSystem.is_level_unlocked(level_id):
+		Notify.warn("Этот уровень ещё не открыт!", 2.0)
+		return
+	
 	level_select.hide()
 	load_level(path)
 	ui.show()
@@ -52,6 +57,13 @@ func _on_level_selected(path):
 
 	game_menu.hide()
 	get_tree().paused = false
+
+func extract_level_id(path: String) -> String:
+	match path:
+		"res://scenes/levels/level_01.tscn": return "level_01"
+		"res://scenes/levels/level_02.tscn": return "level_02"
+		"res://scenes/levels/level_03.tscn": return "level_03"
+	return ""
 
 func _on_back_from_select():
 	level_select.hide()
@@ -91,6 +103,8 @@ func _on_level_select_from_game():
 	hud.hide()
 	level_select.show()
 	
+	update_level_select()
+	
 func _on_main_menu_from_game():
 	get_tree().paused = false
 
@@ -102,6 +116,8 @@ func _on_main_menu_from_game():
 	game_menu.hide()
 	hud.hide()
 	menu.show()
+
+	update_level_select()
 
 func _on_restart_level():
 	game_menu.hide()
@@ -143,6 +159,10 @@ func close_completion_window():
 	if completion_window:
 		completion_window.queue_free()
 
+func update_level_select():
+	level_select.set_unlocked_levels(SaveSystem.save_data.unlocked_levels)
+	level_select.set_level_stars(SaveSystem.save_data.level_stars) 
+
 func show_completion_window(level_type: String, data: Dictionary):
 	var completion_window = get_node_or_null("UI/CompletionWindow")
 	
@@ -156,6 +176,12 @@ func show_completion_window(level_type: String, data: Dictionary):
 			completion_window.next_level_requested.connect(_on_completion_next_level)
 
 		completion_window.show_summary(level_type, data)
+	
+	var level_id = extract_level_id(current_level_path)
+	var earned_stars = data.get("stars", 0)
+	
+	SaveSystem.update_level_stars(level_id, earned_stars) 
+	update_level_select()
 
 func _on_completion_restart():
 	print("Рестарт уровня из окна итогов")

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dxu7wox2t1g4x"
-path="res://.godot/imported/nightcity.png-6fcb521fa6e06e3136f83b359ed2736f.ctex"
+uid="uid://cqvlxh1x71a5r"
+path="res://.godot/imported/daysity.jpg-09da73891493f8f7e29b5fbecccafea5.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/background/nightcity.png"
-dest_files=["res://.godot/imported/nightcity.png-6fcb521fa6e06e3136f83b359ed2736f.ctex"]
+source_file="res://assets/sprites/background/daysity.jpg"
+dest_files=["res://.godot/imported/daysity.jpg-09da73891493f8f7e29b5fbecccafea5.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cqvlxh1x71a5r"
-path="res://.godot/imported/bluecity.jpg-d055beb47344bf092d4fa953ff57c294.ctex"
+uid="uid://dxu7wox2t1g4x"
+path="res://.godot/imported/nightcity.png-d0d6e06efedbfc46af5adcdec8fdc8ef.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/background/bluecity.jpg"
-dest_files=["res://.godot/imported/bluecity.jpg-d055beb47344bf092d4fa953ff57c294.ctex"]
+source_file="res://assets/sprites/background/nightcity.png"
+dest_files=["res://.godot/imported/nightcity.png-d0d6e06efedbfc46af5adcdec8fdc8ef.ctex"]
 
 [params]
 

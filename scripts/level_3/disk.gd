@@ -22,7 +22,7 @@ func setup(s: int):
 	
 	apply_style(false)
 
-func apply_style(highlight: bool):
+func apply_style(is_highlight: bool):
 	var style = StyleBoxFlat.new()
 	style.bg_color = colors[disk_size - 1]
 	style.corner_radius_top_left = 15
@@ -34,7 +34,7 @@ func apply_style(highlight: bool):
 	style.shadow_offset = Vector2(2, 2)
 	style.shadow_color = Color(0, 0, 0, 0.3)
 	
-	if highlight:
+	if is_highlight:
 		style.border_width_left = 1
 		style.border_width_right = 1
 		style.border_width_top = 1
@@ -80,6 +80,3 @@ func animate_move_to(new_position: Vector2, duration: float = 0.15):
 		apply_style(true)
 	
 	is_animating = false
-
-func move_instant(new_position: Vector2):
-	self.position = new_position

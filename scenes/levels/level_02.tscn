@@ -7,7 +7,8 @@
 [ext_resource type="PackedScene" uid="uid://b617fba8fvuvo" path="res://scenes/player/player.tscn" id="3_yjjx0"]
 [ext_resource type="PackedScene" uid="uid://tycds1sjjvs5" path="res://scenes/objects/graph_node.tscn" id="7_ppbiy"]
 [ext_resource type="PackedScene" uid="uid://bhj8yhsi6w7tb" path="res://scenes/objects/check_button.tscn" id="7_yklhy"]
-[ext_resource type="Texture2D" uid="uid://b7eor2q4j7nrw" path="res://assets/background/sunsetcity.png" id="9_c6rld"]
+[ext_resource type="Texture2D" uid="uid://b7eor2q4j7nrw" path="res://assets/sprites/background/sunsetcity.png" id="9_c6rld"]
+[ext_resource type="Texture2D" uid="uid://cymcrwekpovuc" path="res://assets/sprites/cat/ginger-cat.png" id="9_yklhy"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_c5o3r"]
 texture = ExtResource("3_c5o3r")
@@ -441,6 +442,70 @@ sources/0 = SubResource("TileSetAtlasSource_3acmf")
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_a3l5x"]
 distance = -45.0
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_r72dd"]
+atlas = ExtResource("9_yklhy")
+region = Rect2(0, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ijn0p"]
+atlas = ExtResource("9_yklhy")
+region = Rect2(16, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jmes4"]
+atlas = ExtResource("9_yklhy")
+region = Rect2(32, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tyxjt"]
+atlas = ExtResource("9_yklhy")
+region = Rect2(48, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_07lms"]
+atlas = ExtResource("9_yklhy")
+region = Rect2(64, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gi8m4"]
+atlas = ExtResource("9_yklhy")
+region = Rect2(80, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cwffn"]
+atlas = ExtResource("9_yklhy")
+region = Rect2(96, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e6lid"]
+atlas = ExtResource("9_yklhy")
+region = Rect2(112, 16, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_o4ql5"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r72dd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ijn0p")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jmes4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tyxjt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_07lms")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gi8m4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cwffn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e6lid")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
+
 [node name="Level" type="Node2D" unique_id=839377777]
 
 [node name="LevelLogic" type="Node2D" parent="." unique_id=1163777651]
@@ -541,3 +606,11 @@ position = Vector2(0, 13)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="KillZone" unique_id=1655410471]
 shape = SubResource("WorldBoundaryShape2D_a3l5x")
+
+[node name="Cat" type="AnimatedSprite2D" parent="." unique_id=488181980]
+position = Vector2(1562, -37.000008)
+scale = Vector2(1.0000004, 1.03125)
+sprite_frames = SubResource("SpriteFrames_o4ql5")
+animation = &"idle"
+autoplay = "idle"
+frame_progress = 0.58676857

@@ -2,9 +2,8 @@ extends Node
 
 var is_completed = false
 var tutorial_popup = null
-var attempts = 0
+var attempts = 1
 var swap_count = 0
-var start_time = 0 
 
 @onready var feedback_label = $"../FeedbackLabel"
 @onready var main = get_tree().root.get_node("Main")
@@ -76,7 +75,6 @@ func show_tutorial_again(first_time = false):
 
 func start_game():
 	swap_count = 0
-	start_time = Time.get_ticks_msec()
 	feedback_label.text = "Сортировка"
 
 	Notify.info("Расставьте числа в правильном порядке!", 3.0)
@@ -151,17 +149,11 @@ func calculate_min_swaps() -> int:
 	return swaps
 
 func show_completion_window():
-	if main and main.has_method("show_completion_window"):
-		var time_spent = (Time.get_ticks_msec() - start_time) / 1000.0
-		var minutes = floor(time_spent / 60)
-		var seconds = int(time_spent) % 60 
-		var time_string = str(minutes) + "м " + str(seconds) + "с"
-		
+	if main and main.has_method("show_completion_window"):		
 		main.show_completion_window("sorting", {
 			"attempts": attempts,
 			"swap_count": swap_count,
 			"min_swaps": calculate_min_swaps(),
-			"time_spent": time_string,
 			"completed": true,
 			"next_level": "res://scenes/levels/level_02.tscn"
 		})

@@ -14,7 +14,7 @@ func _on_body_entered(body):
 		is_player_near = true
 		print("Игрок рядом с кнопкой!")
 		if sprite:
-			sprite.modulate = Color.YELLOW
+			sprite.modulate = Color.RED
 
 func _on_body_exited(body):
 	if body.name == "Player":

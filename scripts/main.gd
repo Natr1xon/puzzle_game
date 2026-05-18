@@ -125,6 +125,8 @@ func _on_restart_level():
 	if current_level_path != "":
 		load_level(current_level_path)
 	
+	Notify.clear_now()
+	
 func update_hud_info(string: String):
 	hud.update_info(string)
 

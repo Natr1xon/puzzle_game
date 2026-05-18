@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b7eor2q4j7nrw"
-path="res://.godot/imported/sunsetcity.png-f396e27c12225805811ceeb31b9d95c7.ctex"
+uid="uid://cymcrwekpovuc"
+path="res://.godot/imported/ginger-cat.png-51f2ce5de556641d589c5377ca0fd437.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/background/sunsetcity.png"
-dest_files=["res://.godot/imported/sunsetcity.png-f396e27c12225805811ceeb31b9d95c7.ctex"]
+source_file="res://assets/sprites/cat/ginger-cat.png"
+dest_files=["res://.godot/imported/ginger-cat.png-51f2ce5de556641d589c5377ca0fd437.ctex"]
 
 [params]
 

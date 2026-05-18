@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://chs3ia44ls6on"]
 
-[ext_resource type="Script" uid="uid://cfdptn85m3ue8" path="res://scripts/level_01/puzzle_object.gd" id="1_072mk"]
+[ext_resource type="Script" uid="uid://cfdptn85m3ue8" path="res://scripts/level_1/puzzle_object.gd" id="1_072mk"]
 [ext_resource type="Texture2D" uid="uid://8tnd84iqcm6f" path="res://assets/sprites/city/Assets_City.png" id="2_tvsyx"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_pnxph"]

@@ -102,39 +102,12 @@ func show_stars(count: int):
 		star.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 		stars_container.add_child(star)
 
-func evaluate_performance(level: String, data: Dictionary) -> bool:
-	match level:
-		"sorting":
-			var swap_count = data.get("swap_count", 0)
-			var min_swaps = data.get("min_swaps", 0)
-			if min_swaps > 0:
-				var efficiency = float(min_swaps) / float(swap_count) * 100
-				return efficiency >= 70
-			return swap_count <= 20 
-		
-		"graph":
-			var total_sum = data.get("total_sum", 0)
-			var optimal_sum = data.get("optimal_sum", 0)
-			if optimal_sum > 0:
-				var diff_percent = float(total_sum - optimal_sum) / float(optimal_sum) * 100
-				return diff_percent <= 20
-			return total_sum <= 50 
-		
-		"tower":
-			var moves = data.get("moves", 0)
-			var optimal_moves = data.get("optimal_moves", 31)
-			var extra_moves = moves - optimal_moves
-			return extra_moves <= 10
-	
-	return true
-
 func show_sorting_summary(data: Dictionary):
 	title_label.text = "📊 УРОВЕНЬ 1: СОРТИРОВКА"
 	
 	var attempts = data.get("attempts", 1)
 	var swap_count = data.get("swap_count", 0)
 	var min_swaps = data.get("min_swaps", 0)
-	var time_spent = data.get("time_spent", "0с")
 	
 	var info_text = ""
 	info_text += "📋 Попыток: " + str(attempts) + "\n"
@@ -153,15 +126,15 @@ func show_sorting_summary(data: Dictionary):
 		else:
 			info_text += "💪 Слишком много перестановок. Попробуйте найти более эффективное решение.\n"
 	
-	info_text += "⏱ Время: " + time_spent
-	
 	info_label.text = info_text
 	
-	status_label.text = "✅ УРОВЕНЬ ПРОЙДЕН!"
-	status_label.add_theme_color_override("font_color", Color.GREEN)
-	
 	if not can_advance:
-		status_label.text += " (Нужно больше эффективности для перехода)"
+		status_label.text = "❌ УРОВЕНЬ НЕ ПРОЙДЕН!"
+		status_label.add_theme_color_override("font_color", Color.RED)
+	else:
+		status_label.text = "✅ УРОВЕНЬ ПРОЙДЕН!"
+		status_label.add_theme_color_override("font_color", Color.GREEN)
+		
 
 func show_graph_summary(data: Dictionary):
 	title_label.text = "🗺 УРОВЕНЬ 2: ГРАФЫ"
@@ -193,11 +166,12 @@ func show_graph_summary(data: Dictionary):
 	
 	info_label.text = info_text
 	
-	status_label.text = "✅ ЗАДАНИЕ ВЫПОЛНЕНО!"
-	status_label.add_theme_color_override("font_color", Color.GREEN)
-	
 	if not can_advance:
-		status_label.text += " (Нужно найти более короткий путь)"
+		status_label.text = "❌ УРОВЕНЬ НЕ ПРОЙДЕН!"
+		status_label.add_theme_color_override("font_color", Color.RED)
+	else:
+		status_label.text = "✅ УРОВЕНЬ ПРОЙДЕН!"
+		status_label.add_theme_color_override("font_color", Color.GREEN)
 
 func show_tower_summary(data: Dictionary):
 	title_label.text = "🗼 УРОВЕНЬ 3: ХАНОЙСКАЯ БАШНЯ"
@@ -220,14 +194,15 @@ func show_tower_summary(data: Dictionary):
 	else:
 		info_text += "💪 Слишком много лишних ходов (+" + str(extra_moves) + "). Попробуйте найти оптимальную стратегию.\n"
 
-	info_text += "\n⏱ Время: " + time_spent
+	info_text += "\n⏱ Время: " + time_spent + "\n"
 	info_label.text = info_text
 	
-	status_label.text = "✅ БАШНЯ СОБРАНА!"
-	status_label.add_theme_color_override("font_color", Color.GREEN)
-	
 	if not can_advance:
-		status_label.text += " (Нужно меньше лишних ходов)"
+		status_label.text = "❌ УРОВЕНЬ НЕ ПРОЙДЕН!"
+		status_label.add_theme_color_override("font_color", Color.RED)
+	else:
+		status_label.text = "✅ УРОВЕНЬ ПРОЙДЕН!"
+		status_label.add_theme_color_override("font_color", Color.GREEN)
 
 func style_buttons(completed: bool):
 	for child in buttons_container.get_children():
@@ -266,7 +241,7 @@ func style_buttons(completed: bool):
 	menu_btn.pressed.connect(_on_menu_pressed)
 	hbox.add_child(menu_btn)
 	
-	if completed and next_level_path != "" and can_advance:
+	if completed and next_level_path != "":
 		var next_btn = Button.new()
 		next_btn.text = "Следующий уровень →"
 		next_btn.custom_minimum_size = Vector2(160, 40)
@@ -275,9 +250,9 @@ func style_buttons(completed: bool):
 		next_btn.add_theme_color_override("font_color", Color.YELLOW)
 		next_btn.pressed.connect(_on_next_level_pressed)
 		hbox.add_child(next_btn)
-	elif completed and next_level_path != "":
+	elif next_level_path != "":
 		var warning_btn = Button.new()
-		warning_btn.text = "🔒 Нужно лучше"
+		warning_btn.text = "🔒"
 		warning_btn.custom_minimum_size = Vector2(160, 40)
 		warning_btn.disabled = true
 		warning_btn.add_theme_color_override("font_color", Color.GRAY)

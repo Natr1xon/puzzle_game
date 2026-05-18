@@ -18,26 +18,27 @@ var levels = [
 		"title": "Уровень 1. Сортировка",
 		"description": "Изучите основы алгоритмов сортировки данных.",
 		"path": "res://scenes/levels/level_01.tscn",
-		"texture": preload("res://assets/background/bluecity.jpg")
+		"texture": preload("res://assets/sprites/background/daysity.jpg")
 	},
 	{
 		"id": "level_02",
 		"title": "Уровень 2. Графы",
 		"description": "Познакомьтесь с основами теории графов.",
 		"path": "res://scenes/levels/level_02.tscn",
-		"texture": preload("res://assets/background/sunsetcity.png")
+		"texture": preload("res://assets/sprites/background/sunsetcity.png")
 	},
 	{
 		"id": "level_03",
 		"title": "Уровень 3. Ханойская башня",
 		"description": "Решите классическую математическую головоломку.",
 		"path": "res://scenes/levels/level_03.tscn",
-		"texture": preload("res://assets/background/nightcity.png")
+		"texture": preload("res://assets/sprites/background/nightcity.png")
 	}
 ]
 
 func _ready():
 	back_button.pressed.connect(_on_back_pressed)
+	save_reset_button.pressed.connect(_on_reset_pressed)
 	_create_levels()
 
 func set_unlocked_levels(levels_list):
@@ -78,3 +79,12 @@ func _on_level_play(path):
 
 func _on_back_pressed():
 	back_pressed.emit()
+
+func _on_reset_pressed():
+	SaveSystem.reset_progress()
+	
+	var main = get_tree().root.get_node_or_null("Main")
+	if main and main.has_method("update_level_select"):
+		main.update_level_select()
+	
+	Notify.warn("Прогресс сброшен!", 2.0)

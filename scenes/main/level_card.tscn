@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://bdgepx40dcq4"]
 
 [ext_resource type="Script" uid="uid://c3o4028eektaw" path="res://scripts/ui/level_card.gd" id="1_4papr"]
-[ext_resource type="Texture2D" uid="uid://cqvlxh1x71a5r" path="res://assets/background/bluecity.jpg" id="2_pbfun"]
+[ext_resource type="Texture2D" uid="uid://cqvlxh1x71a5r" path="res://assets/sprites/background/daysity.jpg" id="2_pbfun"]
 [ext_resource type="StyleBox" uid="uid://km3nfb571j3q" path="res://styles/buttons/button_card.tres" id="3_j4wrh"]
 [ext_resource type="StyleBox" uid="uid://dnplwcw82ccid" path="res://styles/buttons/hover.tres" id="4_t518s"]
 

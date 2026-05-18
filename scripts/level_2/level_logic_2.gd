@@ -6,7 +6,6 @@ var total_value: int = 0
 var player_path: Array = []
 var drawn_connections = {}
 var tutorial_popup = null
-var start_time = 0 
 var is_completed = false
 
 signal node_reached(node)
@@ -80,7 +79,6 @@ func show_tutorial_again(first_time = false):
 		start_game()
 
 func start_game():
-	start_time = Time.get_ticks_msec()
 	find_all_nodes()
 	reset_total()
 	
@@ -220,16 +218,13 @@ func find_shortest_path(start_node, end_node):
 
 	return path
 
-func calculate_path_cost(path: Array) -> int:
-	var sum = 0
-	for node in path:
-		sum += node.node_value
-	return sum
-
-func compare_with_optimal(start_node, end_node):
+func get_optimal_path(start_node, end_node):
 	var optimal_path = find_shortest_path(start_node, end_node)
 	
-	return calculate_path_cost(optimal_path)
+	var sum = 0
+	for node in optimal_path:
+		sum += node.node_value
+	return sum
 
 func check_win():
 	if player_path.size() == 5:
@@ -241,15 +236,9 @@ func check_win():
 
 func show_completion_window():
 	if main and main.has_method("show_completion_window"):
-		var time_spent = (Time.get_ticks_msec() - start_time) / 1000.0
-		var minutes = floor(time_spent / 60)
-		var seconds = int(time_spent) % 60 
-		var time_string = str(minutes) + "м " + str(seconds) + "с"
-		
-		var optimal_path_sum = compare_with_optimal(player_path[0], player_path[-1])
+		var optimal_path_sum = get_optimal_path(player_path[0], player_path[-1])
 		
 		main.show_completion_window("graph", {
-			"time_spent": time_string,
 			"visited_nodes": player_path.size(),
 			"total_visited": 5,
 			"total_sum": total_value,

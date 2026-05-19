@@ -498,20 +498,20 @@ script = ExtResource("3_r8ojw")
 [node name="Player" parent="." unique_id=1634076529 groups=["player"] instance=ExtResource("3_4wrbh")]
 position = Vector2(-532, -55)
 
-[node name="Pegs" type="Node2D" parent="." unique_id=309709228]
+[node name="PegContainer" type="Node2D" parent="." unique_id=309709228]
 
-[node name="Peg" parent="Pegs" unique_id=870553154 instance=ExtResource("4_1jnh5")]
+[node name="Peg" parent="PegContainer" unique_id=870553154 instance=ExtResource("4_1jnh5")]
 position = Vector2(-128, -88)
 
-[node name="Peg2" parent="Pegs" unique_id=1146229524 instance=ExtResource("4_1jnh5")]
+[node name="Peg2" parent="PegContainer" unique_id=1146229524 instance=ExtResource("4_1jnh5")]
 position = Vector2(0, -88)
 index = 1
 
-[node name="Peg3" parent="Pegs" unique_id=1083744063 instance=ExtResource("4_1jnh5")]
+[node name="Peg3" parent="PegContainer" unique_id=1083744063 instance=ExtResource("4_1jnh5")]
 position = Vector2(128, -87)
 index = 2
 
-[node name="Disks" type="Node2D" parent="." unique_id=277742760]
+[node name="DiskContainer" type="Node2D" parent="." unique_id=277742760]
 z_index = 4
 
 [node name="Back" type="TileMapLayer" parent="." unique_id=575311669]

@@ -90,7 +90,7 @@ func start_game():
 			print("ОШИБКА: InputHandler не найден!")
 			return
 	
-	var pegs_list = $"../Pegs".get_children()
+	var pegs_list = $"../PegContainer".get_children()
 	for i in range(pegs_list.size()):
 		pegs_list[i].index = i
 	
@@ -119,20 +119,20 @@ func interact_with_current_peg():
 		return false
 
 func highlight_peg(peg_index: int, highlight: bool):
-	var peg = $"../Pegs".get_child(peg_index)
+	var peg = $"../PegContainer".get_child(peg_index)
 	var sprite = peg.get_node_or_null("Sprite2D")
 	if sprite:
 		sprite.modulate = Color.RED if highlight else Color.WHITE
 
 func init_game():
-	for child in $"../Disks".get_children():
+	for child in $"../DiskContainer".get_children():
 		child.queue_free()
 	
 	pegs = [[], [], []]
 	
 	for i in range(5, 0, -1):
 		var disk = create_disk(i)
-		$"../Disks".add_child(disk)
+		$"../DiskContainer".add_child(disk)
 		pegs[0].append(disk)
 	
 	update_view()
@@ -144,7 +144,7 @@ func create_disk(size):
 
 func update_view():
 	for peg_index in range(3):
-		var peg = $"../Pegs".get_child(peg_index)
+		var peg = $"../PegContainer".get_child(peg_index)
 		
 		for i in range(pegs[peg_index].size()):
 			var disk = pegs[peg_index][i]

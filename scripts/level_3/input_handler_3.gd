@@ -59,7 +59,7 @@ func move_disk(from_peg: int, to_peg: int):
 			is_moving = false
 			return
 	
-	var end_peg = get_node("../Pegs").get_child(to_peg)
+	var end_peg = get_node("../PegContainer").get_child(to_peg)
 	
 	var final_y = -25 - level_logic.pegs[to_peg].size() * (disk.size.y + 2)
 	var final_x = end_peg.global_position.x - disk.size.x / 2

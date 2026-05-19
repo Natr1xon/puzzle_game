@@ -29,12 +29,12 @@ text = "Меню"
 layout_mode = 0
 offset_left = 112.0
 offset_top = 24.0
-offset_right = 207.0
+offset_right = 216.0
 offset_bottom = 64.0
 theme_override_styles/normal = ExtResource("2_hqnrr")
 theme_override_styles/pressed = ExtResource("2_hqnrr")
 theme_override_styles/hover = ExtResource("3_8qguk")
-text = "Tutorial"
+text = "Туториал"
 
 [node name="InfoLabel" type="Label" parent="." unique_id=120869793]
 layout_mode = 0

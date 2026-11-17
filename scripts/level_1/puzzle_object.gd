@@ -8,13 +8,8 @@ var is_highlighted = false
 var message_timer = null
 var original_modulate = Color.WHITE
 
-@export var min_value: int = 1
-@export var max_value: int = 9
-
 func _ready():
-	value = randi_range(min_value, max_value)
 	update_label()
-	print("Я появился:", value)
 	
 	add_to_group("puzzle_objects")
 	

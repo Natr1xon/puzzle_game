@@ -75,6 +75,9 @@ func show_tutorial_again(first_time = false):
 
 func start_game():
 	swap_count = 0
+	attempts = 1
+	is_completed = false
+	assign_unique_values()
 	feedback_label.text = "Сортировка"
 
 	Notify.info("Расставьте числа в правильном порядке!", 3.0)
@@ -85,6 +88,19 @@ func get_objects():
 		if child.has_method("get_value"):
 			result.append(child)
 	return result
+
+func assign_unique_values():
+	var objects = get_objects()
+	var values = range(1, 10)
+
+	if objects.size() > values.size():
+		push_error("Недостаточно уникальных чисел для всех коробок")
+		return
+
+	values.shuffle()
+
+	for index in range(objects.size()):
+		objects[index].set_value(values[index])
 
 func increment_swap():
 	swap_count += 1

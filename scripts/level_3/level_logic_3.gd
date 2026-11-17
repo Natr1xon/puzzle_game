@@ -1,15 +1,14 @@
 extends Node2D
 
 var pegs = [[], [], []]
-var selected_peg = -1
-var current_near_peg = -1
-var tutorial_popup = null
-var moves_count = 0  
-var start_time = 0   
-var is_completed = false  
+var current_near_peg: int = -1
+var tutorial_popup: CanvasLayer = null
+var moves_count: int = 0
+var start_time: int = 0
+var is_completed: bool = false
 
 var DiskScene = preload("res://scenes/objects/disk.tscn")
-var input_handler = null
+@onready var input_handler = get_node("../InputHandler")
 @onready var main = get_tree().root.get_node("Main")
 
 func _ready():
@@ -80,15 +79,9 @@ func show_tutorial_again(first_time = false):
 		start_game()
 
 func start_game():
-	moves_count = 0 
-	start_time = Time.get_ticks_msec() 
-
-	input_handler = get_node_or_null("../InputHandler")
-	if not input_handler:
-		input_handler = get_tree().get_first_node_in_group("input_handler")
-		if not input_handler:
-			print("ОШИБКА: InputHandler не найден!")
-			return
+	moves_count = 0
+	start_time = Time.get_ticks_msec()
+	is_completed = false
 	
 	var pegs_list = $"../PegContainer".get_children()
 	for i in range(pegs_list.size()):
@@ -106,23 +99,69 @@ func on_player_exited_peg_zone(peg_index: int):
 	if current_near_peg == peg_index:
 		current_near_peg = -1
 
-func interact_with_current_peg():
+func interact_with_current_peg() -> bool:
 	if current_near_peg == -1:
 		Notify.warn("Подойдите к колышку!")
 		return false
 
-	if input_handler and input_handler.has_method("handle_peg_clicked"):
+	if input_handler:
 		input_handler.handle_peg_clicked(current_near_peg)
 		return true
-	else:
-		print("ОШИБКА: input_handler не готов!")
-		return false
+
+	return false
 
 func highlight_peg(peg_index: int, highlight: bool):
 	var peg = $"../PegContainer".get_child(peg_index)
 	var sprite = peg.get_node_or_null("Sprite2D")
 	if sprite:
 		sprite.modulate = Color.RED if highlight else Color.WHITE
+
+func can_move_disk(from_peg: int, to_peg: int) -> bool:
+	if from_peg < 0 or from_peg >= pegs.size():
+		return false
+	if to_peg < 0 or to_peg >= pegs.size():
+		return false
+	if pegs[from_peg].is_empty():
+		return false
+	if pegs[to_peg].is_empty():
+		return true
+
+	return pegs[from_peg].back().disk_size < pegs[to_peg].back().disk_size
+
+func move_disk(from_peg: int, to_peg: int) -> bool:
+	if not can_move_disk(from_peg, to_peg):
+		Notify.error("Нельзя положить большой диск \n на маленький!")
+		return false
+
+	var disk = pegs[from_peg].back()
+	var end_peg: Node2D = $"../PegContainer".get_child(to_peg)
+	var target_position := Vector2(
+		end_peg.global_position.x - disk.size.x / 2.0,
+		-25 - pegs[to_peg].size() * (disk.size.y + 2)
+	)
+	var lift_position := Vector2(disk.position.x, disk.position.y - 50)
+
+	var tween := create_tween()
+	tween.set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUAD)
+	tween.tween_property(disk, "position", lift_position, 0.25)
+	await tween.finished
+
+	pegs[from_peg].pop_back()
+	pegs[to_peg].append(disk)
+	increment_moves()
+
+	tween = create_tween()
+	tween.set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_QUAD)
+	tween.tween_property(disk, "position:x", target_position.x, 0.35)
+	await tween.finished
+
+	tween = create_tween()
+	tween.set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_QUAD)
+	tween.tween_property(disk, "position", target_position, 0.25)
+	await tween.finished
+
+	update_view()
+	return true
 
 func init_game():
 	for child in $"../DiskContainer".get_children():

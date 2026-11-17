@@ -15,7 +15,7 @@ func _ready():
 	
 	var collision = CollisionShape2D.new()
 	var shape = RectangleShape2D.new()
-	shape.extents = Vector2(80, 80)
+	shape.extents = Vector2(50, 80)
 	collision.shape = shape
 	
 	detection_area.add_child(collision)

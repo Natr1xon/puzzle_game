@@ -182,14 +182,17 @@ script = ExtResource("1_g2els")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=394219409]
 sprite_frames = SubResource("SpriteFrames_tuyoq")
-animation = &"idle"
+animation = &"run"
 autoplay = "idle"
+frame_progress = 0.53410035
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1645753426]
+visible = false
 position = Vector2(-0.125, 5)
 shape = SubResource("RectangleShape2D_fjrip")
 
 [node name="InteractionArea" type="Area2D" parent="." unique_id=189435164]
+visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionArea" unique_id=1245343701]
 position = Vector2(0, 5)
